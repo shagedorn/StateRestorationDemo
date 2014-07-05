@@ -10,16 +10,18 @@ import UIKit
 
 class SecondViewController: UIViewController {
                             
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet var imageView: UIImageView
+    @IBOutlet var citySelectionControl: UISegmentedControl
+
+    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        tabBarItem = UITabBarItem(title: "Second", image: UIImage(named: "second"), tag: 0)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func chooseCity(sender: AnyObject) {
+        let cityController = CityViewController()
+        navigationController.pushViewController(cityController, animated: true)
     }
-
 
 }
 

@@ -10,16 +10,11 @@ import UIKit
 
 class FirstViewController: UIViewController {
                             
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet var slider: UISlider
+    
+    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 

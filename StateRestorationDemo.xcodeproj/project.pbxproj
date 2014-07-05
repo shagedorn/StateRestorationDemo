@@ -10,20 +10,12 @@
 		1B121AAE19688F6D0038598A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B121AAD19688F6D0038598A /* AppDelegate.swift */; };
 		1B121AB019688F6D0038598A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B121AAF19688F6D0038598A /* FirstViewController.swift */; };
 		1B121AB219688F6D0038598A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B121AB119688F6D0038598A /* SecondViewController.swift */; };
-		1B121AB519688F6D0038598A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B121AB319688F6D0038598A /* Main.storyboard */; };
 		1B121AB719688F6E0038598A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B121AB619688F6E0038598A /* Images.xcassets */; };
-		1B121AC319688F6E0038598A /* StateRestorationDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B121AC219688F6E0038598A /* StateRestorationDemoTests.swift */; };
+		1B121AD3196893820038598A /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B121AD2196893820038598A /* FirstViewController.xib */; };
+		1B121AD5196894F10038598A /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B121AD4196894F10038598A /* SecondViewController.xib */; };
+		1B121AD819689C5D0038598A /* CityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B121AD619689C5D0038598A /* CityViewController.swift */; };
+		1B121AD919689C5D0038598A /* CityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B121AD719689C5D0038598A /* CityViewController.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		1B121ABD19688F6E0038598A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1B121AA019688F6D0038598A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1B121AA719688F6D0038598A;
-			remoteInfo = StateRestorationDemo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1B121AA819688F6D0038598A /* StateRestorationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StateRestorationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,22 +23,17 @@
 		1B121AAD19688F6D0038598A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B121AAF19688F6D0038598A /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		1B121AB119688F6D0038598A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		1B121AB419688F6D0038598A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1B121AB619688F6E0038598A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		1B121ABC19688F6E0038598A /* StateRestorationDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StateRestorationDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B121AC119688F6E0038598A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B121AC219688F6E0038598A /* StateRestorationDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateRestorationDemoTests.swift; sourceTree = "<group>"; };
+		1B121AD2196893820038598A /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
+		1B121AD4196894F10038598A /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
+		1B121AD619689C5D0038598A /* CityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityViewController.swift; sourceTree = "<group>"; };
+		1B121AD719689C5D0038598A /* CityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CityViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1B121AA519688F6D0038598A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1B121AB919688F6E0038598A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -69,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				1B121AA819688F6D0038598A /* StateRestorationDemo.app */,
-				1B121ABC19688F6E0038598A /* StateRestorationDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,8 +65,11 @@
 			children = (
 				1B121AAD19688F6D0038598A /* AppDelegate.swift */,
 				1B121AAF19688F6D0038598A /* FirstViewController.swift */,
+				1B121AD2196893820038598A /* FirstViewController.xib */,
 				1B121AB119688F6D0038598A /* SecondViewController.swift */,
-				1B121AB319688F6D0038598A /* Main.storyboard */,
+				1B121AD4196894F10038598A /* SecondViewController.xib */,
+				1B121AD619689C5D0038598A /* CityViewController.swift */,
+				1B121AD719689C5D0038598A /* CityViewController.xib */,
 				1B121AB619688F6E0038598A /* Images.xcassets */,
 				1B121AAB19688F6D0038598A /* Supporting Files */,
 			);
@@ -132,24 +121,6 @@
 			productReference = 1B121AA819688F6D0038598A /* StateRestorationDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1B121ABB19688F6E0038598A /* StateRestorationDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1B121AC919688F6E0038598A /* Build configuration list for PBXNativeTarget "StateRestorationDemoTests" */;
-			buildPhases = (
-				1B121AB819688F6E0038598A /* Sources */,
-				1B121AB919688F6E0038598A /* Frameworks */,
-				1B121ABA19688F6E0038598A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1B121ABE19688F6E0038598A /* PBXTargetDependency */,
-			);
-			name = StateRestorationDemoTests;
-			productName = StateRestorationDemoTests;
-			productReference = 1B121ABC19688F6E0038598A /* StateRestorationDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -161,10 +132,6 @@
 				TargetAttributes = {
 					1B121AA719688F6D0038598A = {
 						CreatedOnToolsVersion = 6.0;
-					};
-					1B121ABB19688F6E0038598A = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 1B121AA719688F6D0038598A;
 					};
 				};
 			};
@@ -182,7 +149,6 @@
 			projectRoot = "";
 			targets = (
 				1B121AA719688F6D0038598A /* StateRestorationDemo */,
-				1B121ABB19688F6E0038598A /* StateRestorationDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -192,15 +158,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B121AB519688F6D0038598A /* Main.storyboard in Resources */,
 				1B121AB719688F6E0038598A /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1B121ABA19688F6E0038598A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				1B121AD3196893820038598A /* FirstViewController.xib in Resources */,
+				1B121AD5196894F10038598A /* SecondViewController.xib in Resources */,
+				1B121AD919689C5D0038598A /* CityViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,37 +175,11 @@
 				1B121AB219688F6D0038598A /* SecondViewController.swift in Sources */,
 				1B121AAE19688F6D0038598A /* AppDelegate.swift in Sources */,
 				1B121AB019688F6D0038598A /* FirstViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1B121AB819688F6E0038598A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1B121AC319688F6E0038598A /* StateRestorationDemoTests.swift in Sources */,
+				1B121AD819689C5D0038598A /* CityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1B121ABE19688F6E0038598A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1B121AA719688F6D0038598A /* StateRestorationDemo */;
-			targetProxy = 1B121ABD19688F6E0038598A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		1B121AB319688F6D0038598A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1B121AB419688F6D0038598A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1B121AC419688F6E0038598A /* Debug */ = {
@@ -281,7 +216,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -317,7 +252,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -346,42 +281,6 @@
 			};
 			name = Release;
 		};
-		1B121ACA19688F6E0038598A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/StateRestorationDemo.app/StateRestorationDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = StateRestorationDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		1B121ACB19688F6E0038598A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/StateRestorationDemo.app/StateRestorationDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = StateRestorationDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -399,14 +298,6 @@
 			buildConfigurations = (
 				1B121AC719688F6E0038598A /* Debug */,
 				1B121AC819688F6E0038598A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		1B121AC919688F6E0038598A /* Build configuration list for PBXNativeTarget "StateRestorationDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1B121ACA19688F6E0038598A /* Debug */,
-				1B121ACB19688F6E0038598A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
