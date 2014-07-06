@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, UIStateRestoring {
                             
     @IBOutlet var slider: UISlider
     
@@ -16,6 +16,16 @@ class FirstViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
         restorationIdentifier = NSString(CString: object_getClassName(self))
+    }
+
+    override func encodeRestorableStateWithCoder(coder: NSCoder!)  {
+        super.encodeRestorableStateWithCoder(coder)
+        coder.encodeFloat(slider.value, forKey: "encodingKeySliderValue")
+    }
+
+    override func decodeRestorableStateWithCoder(coder: NSCoder!)  {
+        super.decodeRestorableStateWithCoder(coder)
+        slider.value = coder.decodeFloatForKey("encodingKeySliderValue")
     }
 }
 

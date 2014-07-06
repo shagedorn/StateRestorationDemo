@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UIStateRestoring {
                             
     @IBOutlet var imageView: UIImageView
     @IBOutlet var citySelectionControl: UISegmentedControl
@@ -44,6 +44,17 @@ class SecondViewController: UIViewController {
         let selectedIndex = citySelectionControl.selectedSegmentIndex
         let cityController = CityViewController(cityName:cities[selectedIndex])
         navigationController.pushViewController(cityController, animated: true)
+    }
+
+    override func encodeRestorableStateWithCoder(coder: NSCoder!)  {
+        super.encodeRestorableStateWithCoder(coder)
+        coder.encodeInteger(citySelectionControl.selectedSegmentIndex, forKey: "encodingKeySegmentIndex")
+    }
+
+    override func decodeRestorableStateWithCoder(coder: NSCoder!)  {
+        super.decodeRestorableStateWithCoder(coder)
+        citySelectionControl.selectedSegmentIndex = coder.decodeIntegerForKey("encodingKeySegmentIndex")
+        selectionChanged(citySelectionControl)
     }
 
 }
