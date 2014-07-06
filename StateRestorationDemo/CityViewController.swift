@@ -13,4 +13,16 @@ class CityViewController: UIViewController {
     @IBOutlet var imageView: UIImageView
     @IBOutlet var nameLabel: UILabel
 
+    var cityName: String
+
+    init(cityName: String) {
+        self.cityName = cityName
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        nameLabel.text = cityName
+        imageView.image = UIImage(named:cityName)
+    }
 }

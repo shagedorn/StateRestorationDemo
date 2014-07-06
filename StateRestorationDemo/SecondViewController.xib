@@ -22,6 +22,9 @@
                         <segment title="First"/>
                         <segment title="Second"/>
                     </segments>
+                    <connections>
+                        <action selector="selectionChanged:" destination="-1" eventType="valueChanged" id="YJK-GF-26O"/>
+                    </connections>
                 </segmentedControl>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOr-83-W30">
                     <rect key="frame" x="40" y="88" width="240" height="368"/>

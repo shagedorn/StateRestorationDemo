@@ -12,8 +12,8 @@ class FirstViewController: UIViewController {
                             
     @IBOutlet var slider: UISlider
     
-    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init() {
+        super.init(nibName: nil, bundle: nil)
         tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
     }
 }

@@ -17,10 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
 
         // First Screen
-        let firstViewController = FirstViewController(nibName: nil, bundle: nil)
+        let firstViewController = FirstViewController()
 
         // Second Screen
-        let secondRootViewController = SecondViewController(nibName: nil, bundle: nil)
+        let secondRootViewController = SecondViewController()
         let secondViewController = UINavigationController(rootViewController: secondRootViewController)
 
         let tabController = UITabBarController()
