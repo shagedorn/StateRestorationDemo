@@ -15,6 +15,7 @@ class FirstViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
+        restorationIdentifier = NSString(CString: object_getClassName(self))
     }
 }
 

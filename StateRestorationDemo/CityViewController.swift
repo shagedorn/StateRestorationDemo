@@ -18,6 +18,7 @@ class CityViewController: UIViewController {
     init(cityName: String) {
         self.cityName = cityName
         super.init(nibName: nil, bundle: nil)
+        restorationIdentifier = NSString(CString: object_getClassName(self))
     }
 
     override func viewDidLoad() {

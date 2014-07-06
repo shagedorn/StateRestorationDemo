@@ -22,9 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Second Screen
         let secondRootViewController = SecondViewController()
         let secondViewController = UINavigationController(rootViewController: secondRootViewController)
+        secondViewController.restorationIdentifier = "NavigationController"
 
         let tabController = UITabBarController()
         tabController.viewControllers = [firstViewController, secondViewController]
+        tabController.restorationIdentifier = "TabController"
 
         window!.rootViewController = tabController
         window!.makeKeyAndVisible()
