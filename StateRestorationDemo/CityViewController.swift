@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CityViewController: UIViewController {
+class CityViewController: UIViewController, UIViewControllerRestoration {
 
     @IBOutlet var imageView: UIImageView
     @IBOutlet var nameLabel: UILabel
@@ -19,11 +19,16 @@ class CityViewController: UIViewController {
         self.cityName = cityName
         super.init(nibName: nil, bundle: nil)
         restorationIdentifier = NSString(CString: object_getClassName(self))
+        restorationClass = object_getClass(self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = cityName
         imageView.image = UIImage(named:cityName)
+    }
+
+    class func viewControllerWithRestorationIdentifierPath(identifierComponents: AnyObject[]!, coder: NSCoder!) -> UIViewController! {
+        return CityViewController(cityName: "")
     }
 }
