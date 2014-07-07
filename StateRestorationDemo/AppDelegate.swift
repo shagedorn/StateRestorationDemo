@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window!.restorationIdentifier = "mainWindow"
 
         // First Screen
         let firstViewController = FirstViewController()
