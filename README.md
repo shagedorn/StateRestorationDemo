@@ -2,7 +2,7 @@
 
 #### Swift app to demonstrate state preservation and restoration APIs.
 
-![](https://raw.githubusercontent.com/shagedorn/StateRestorationDemo/master/Presentation/app_screenshot.png =320x)
+![](https://raw.githubusercontent.com/shagedorn/StateRestorationDemo/master/Presentation/app_screenshot.png)
 
 Created for a presentation at CocoaHeads Dresden on 09 July 2014. The presentation is included in the repository, the slides are currently only available in German. Feel free to contact me if English slides are of interest: [@hagidd](http://twitter.com/hagidd).
 
