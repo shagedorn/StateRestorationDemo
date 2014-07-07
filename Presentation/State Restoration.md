@@ -2,7 +2,7 @@
 
 Deckset presentation
 Author: Sebastian Hagedorn
-Deckset Theme: Franziska, light green
+Deckset Theme: Franziska, light green, 16:9
 
 -->
 
@@ -255,7 +255,7 @@ CocoaHeads Dresden
 + Tipp: `data.data`-Suche im Simulator-Ordner in Finder-Sidebar speichern
 + Aufruf: `restorationArchiveTool path/to/data.data`
 
-![inline, 100%](https://raw.githubusercontent.com/shagedorn/StateRestorationDemo/master/Presentation/data_example.png)
+![inline, fill](https://raw.githubusercontent.com/shagedorn/StateRestorationDemo/master/Presentation/data_example.png)
 
 ---
 
