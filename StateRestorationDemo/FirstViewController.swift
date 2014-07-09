@@ -15,7 +15,7 @@ class FirstViewController: UIViewController, UIStateRestoring {
     init() {
         super.init(nibName: nil, bundle: nil)
         tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
-        restorationIdentifier = NSString(CString: object_getClassName(self))
+        restorationIdentifier = String.fromCString(object_getClassName(self))
     }
 
     override func encodeRestorableStateWithCoder(coder: NSCoder!)  {

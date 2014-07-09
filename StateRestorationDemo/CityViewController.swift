@@ -18,7 +18,7 @@ class CityViewController: UIViewController, UIViewControllerRestoration, UIState
     init(cityName: String) {
         self.cityName = cityName
         super.init(nibName: nil, bundle: nil)
-        restorationIdentifier = NSString(CString: object_getClassName(self))
+        restorationIdentifier = String.fromCString(object_getClassName(self))
         restorationClass = object_getClass(self)
     }
 
@@ -30,7 +30,7 @@ class CityViewController: UIViewController, UIViewControllerRestoration, UIState
         }
     }
 
-    class func viewControllerWithRestorationIdentifierPath(identifierComponents: AnyObject[]!, coder: NSCoder!) -> UIViewController! {
+    class func viewControllerWithRestorationIdentifierPath(identifierComponents: [AnyObject]!, coder: NSCoder!) -> UIViewController! {
         return CityViewController(cityName: "")
     }
 

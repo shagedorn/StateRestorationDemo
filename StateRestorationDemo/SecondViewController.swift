@@ -18,7 +18,7 @@ class SecondViewController: UIViewController, UIStateRestoring {
     init() {
         super.init(nibName: nil, bundle: nil)
         tabBarItem = UITabBarItem(title: "Second", image: UIImage(named: "second"), tag: 0)
-        restorationIdentifier = NSString(CString: object_getClassName(self))
+        restorationIdentifier = String.fromCString(object_getClassName(self))
     }
 
     override func viewDidLoad() {
