@@ -299,7 +299,7 @@ CocoaHeads Dresden
     + Snapshot ignorieren:
 
 ```objectivec
-[UIApplication sharedApplication] ignoreSnapshotOnNextApplicationLaunch];
+[[UIApplication sharedApplication] ignoreSnapshotOnNextApplicationLaunch];
 ```
 ---
 
