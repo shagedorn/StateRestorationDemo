@@ -10,8 +10,8 @@ import UIKit
 
 class SecondViewController: UIViewController, UIStateRestoring {
                             
-    @IBOutlet var imageView: UIImageView
-    @IBOutlet var citySelectionControl: UISegmentedControl
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var citySelectionControl: UISegmentedControl!
 
     var cities: Array<String> = ["Dresden", "Cologne"]
 

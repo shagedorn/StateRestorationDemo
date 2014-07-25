@@ -10,7 +10,7 @@ import UIKit
 
 class FirstViewController: UIViewController, UIStateRestoring {
                             
-    @IBOutlet var slider: UISlider
+    @IBOutlet weak var slider: UISlider!
     
     init() {
         super.init(nibName: nil, bundle: nil)

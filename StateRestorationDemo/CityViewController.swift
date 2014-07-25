@@ -10,8 +10,8 @@ import UIKit
 
 class CityViewController: UIViewController, UIViewControllerRestoration, UIStateRestoring {
 
-    @IBOutlet var imageView: UIImageView
-    @IBOutlet var nameLabel: UILabel
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
 
     var cityName: String
 
@@ -24,7 +24,7 @@ class CityViewController: UIViewController, UIViewControllerRestoration, UIState
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if cityName.utf16count > 0 {
+        if cityName.utf16Count > 0 {
             nameLabel.text = cityName
             imageView.image = UIImage(named:cityName)
         }
