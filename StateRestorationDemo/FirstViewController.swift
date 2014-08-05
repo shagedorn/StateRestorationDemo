@@ -12,10 +12,14 @@ class FirstViewController: UIViewController, UIStateRestoring {
                             
     @IBOutlet weak var slider: UISlider!
     
-    init() {
+    override init() {
         super.init(nibName: nil, bundle: nil)
         tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
         restorationIdentifier = String.fromCString(object_getClassName(self))
+    }
+
+    required init(coder aDecoder: NSCoder!) {
+        fatalError("NSCoding not supported")
     }
 
     override func encodeRestorableStateWithCoder(coder: NSCoder!)  {

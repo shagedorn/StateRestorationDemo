@@ -15,10 +15,14 @@ class SecondViewController: UIViewController, UIStateRestoring {
 
     var cities: Array<String> = ["Dresden", "Cologne"]
 
-    init() {
+    override init() {
         super.init(nibName: nil, bundle: nil)
         tabBarItem = UITabBarItem(title: "Second", image: UIImage(named: "second"), tag: 0)
         restorationIdentifier = String.fromCString(object_getClassName(self))
+    }
+
+    required init(coder aDecoder: NSCoder!) {
+        fatalError("NSCoding not supported")
     }
 
     override func viewDidLoad() {

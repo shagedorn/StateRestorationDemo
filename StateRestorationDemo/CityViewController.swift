@@ -22,6 +22,10 @@ class CityViewController: UIViewController, UIViewControllerRestoration, UIState
         restorationClass = object_getClass(self)
     }
 
+    required init(coder aDecoder: NSCoder!) {
+        fatalError("NSCoding not supported")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if cityName.utf16Count > 0 {
