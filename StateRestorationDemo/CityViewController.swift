@@ -17,12 +17,12 @@ class CityViewController: UIViewController, UIViewControllerRestoration, UIState
 
     init(cityName: String) {
         self.cityName = cityName
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: "CityViewController", bundle: nil)
         restorationIdentifier = String.fromCString(object_getClassName(self))
         restorationClass = object_getClass(self)
     }
 
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
 
@@ -34,16 +34,16 @@ class CityViewController: UIViewController, UIViewControllerRestoration, UIState
         }
     }
 
-    class func viewControllerWithRestorationIdentifierPath(identifierComponents: [AnyObject]!, coder: NSCoder!) -> UIViewController! {
+    class func viewControllerWithRestorationIdentifierPath(identifierComponents: [AnyObject], coder: NSCoder) -> UIViewController? {
         return CityViewController(cityName: "")
     }
 
-    override func encodeRestorableStateWithCoder(coder: NSCoder!)  {
+    override func encodeRestorableStateWithCoder(coder: NSCoder)  {
         super.encodeRestorableStateWithCoder(coder)
         coder.encodeObject(cityName, forKey: "encodingKeyName")
     }
 
-    override func decodeRestorableStateWithCoder(coder: NSCoder!)  {
+    override func decodeRestorableStateWithCoder(coder: NSCoder)  {
         super.decodeRestorableStateWithCoder(coder)
         cityName = coder.decodeObjectForKey("encodingKeyName") as String
         nameLabel.text = cityName

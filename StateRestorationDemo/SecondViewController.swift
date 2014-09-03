@@ -16,12 +16,12 @@ class SecondViewController: UIViewController, UIStateRestoring {
     var cities: Array<String> = ["Dresden", "Cologne"]
 
     override init() {
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: "SecondViewController", bundle: nil)
         tabBarItem = UITabBarItem(title: "Second", image: UIImage(named: "second"), tag: 0)
         restorationIdentifier = String.fromCString(object_getClassName(self))
     }
 
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
 
@@ -47,15 +47,15 @@ class SecondViewController: UIViewController, UIStateRestoring {
     @IBAction func chooseCity(sender: AnyObject) {
         let selectedIndex = citySelectionControl.selectedSegmentIndex
         let cityController = CityViewController(cityName:cities[selectedIndex])
-        navigationController.pushViewController(cityController, animated: true)
+        navigationController?.pushViewController(cityController, animated: true)
     }
 
-    override func encodeRestorableStateWithCoder(coder: NSCoder!)  {
+    override func encodeRestorableStateWithCoder(coder: NSCoder)  {
         super.encodeRestorableStateWithCoder(coder)
         coder.encodeInteger(citySelectionControl.selectedSegmentIndex, forKey: "encodingKeySegmentIndex")
     }
 
-    override func decodeRestorableStateWithCoder(coder: NSCoder!)  {
+    override func decodeRestorableStateWithCoder(coder: NSCoder)  {
         super.decodeRestorableStateWithCoder(coder)
         citySelectionControl.selectedSegmentIndex = coder.decodeIntegerForKey("encodingKeySegmentIndex")
         selectionChanged(citySelectionControl)

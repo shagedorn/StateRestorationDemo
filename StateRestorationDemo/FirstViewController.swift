@@ -13,21 +13,21 @@ class FirstViewController: UIViewController, UIStateRestoring {
     @IBOutlet weak var slider: UISlider!
     
     override init() {
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: "FirstViewController", bundle: nil)
         tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
         restorationIdentifier = String.fromCString(object_getClassName(self))
     }
 
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
 
-    override func encodeRestorableStateWithCoder(coder: NSCoder!)  {
+    override func encodeRestorableStateWithCoder(coder: NSCoder)  {
         super.encodeRestorableStateWithCoder(coder)
         coder.encodeFloat(slider.value, forKey: "encodingKeySliderValue")
     }
 
-    override func decodeRestorableStateWithCoder(coder: NSCoder!)  {
+    override func decodeRestorableStateWithCoder(coder: NSCoder)  {
         super.decodeRestorableStateWithCoder(coder)
         slider.value = coder.decodeFloatForKey("encodingKeySliderValue")
     }
