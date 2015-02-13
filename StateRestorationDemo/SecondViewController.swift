@@ -52,7 +52,9 @@ class SecondViewController: UIViewController, UIStateRestoring {
 
     override func encodeRestorableStateWithCoder(coder: NSCoder)  {
         super.encodeRestorableStateWithCoder(coder)
-        coder.encodeInteger(citySelectionControl.selectedSegmentIndex, forKey: "encodingKeySegmentIndex")
+        if citySelectionControl != nil {
+            coder.encodeInteger(citySelectionControl.selectedSegmentIndex, forKey: "encodingKeySegmentIndex")
+        }
     }
 
     override func decodeRestorableStateWithCoder(coder: NSCoder)  {

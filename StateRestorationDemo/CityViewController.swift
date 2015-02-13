@@ -18,6 +18,7 @@ class CityViewController: UIViewController, UIViewControllerRestoration, UIState
     init(cityName: String) {
         self.cityName = cityName
         super.init(nibName: "CityViewController", bundle: nil)
+        self.hidesBottomBarWhenPushed = true
         restorationIdentifier = String.fromCString(object_getClassName(self))
         restorationClass = object_getClass(self)
     }
@@ -45,7 +46,7 @@ class CityViewController: UIViewController, UIViewControllerRestoration, UIState
 
     override func decodeRestorableStateWithCoder(coder: NSCoder)  {
         super.decodeRestorableStateWithCoder(coder)
-        cityName = coder.decodeObjectForKey("encodingKeyName") as String
+        cityName = coder.decodeObjectForKey("encodingKeyName") as! String
         nameLabel.text = cityName
         imageView.image = UIImage(named:cityName)
     }

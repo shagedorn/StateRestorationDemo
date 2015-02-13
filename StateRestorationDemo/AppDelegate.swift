@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
 
-    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.restorationIdentifier = "mainWindow"
 
@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Second Screen
         let secondRootViewController = SecondViewController()
-        let secondViewController = UINavigationController(rootViewController: secondRootViewController)!
+        let secondViewController = UINavigationController(rootViewController: secondRootViewController)
         secondViewController.restorationIdentifier = "NavigationController"
 
         let tabController = UITabBarController()
@@ -31,15 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window!.rootViewController = tabController
         window!.makeKeyAndVisible()
-
+        
         return true
     }
 
-    func application(application: UIApplication!, shouldSaveApplicationState coder: NSCoder!) -> Bool {
+    func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
         return true
     }
 
-    func application(application: UIApplication!, shouldRestoreApplicationState coder: NSCoder!) -> Bool {
+    func application(application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
         return true
     }
 
