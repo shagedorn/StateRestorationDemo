@@ -16,9 +16,9 @@ Deckset Theme: Franziska, light green, 16:9
 
 -
 
-Sebastian Hagedorn
-CocoaHeads Dresden
-09.07.2014
+Sebastian Hagedorn  
+CocoaHeads Dresden  
+09.07.2014  
 
 ---
 
@@ -62,14 +62,15 @@ CocoaHeads Dresden
 
 + Opt-In im App Delegate:
 
-```objectivec
+```objectivec  
+
 - (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder;
  
 - (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder;
 ```
 
 + Restoration-Datei wird angelegt, enthält globale App-Infos (Version, Timestamp, Interface Idiom,...)
-+ `return NO` nach inkompatiblen Updates oder großer Zeitspanne
++ `return NO` in `shouldRestoreApplicationState` nach inkompatiblen Updates oder großer Zeitspanne
 
 ^ noch keine Infos über ViewController enthalten  
 ^ konservative Variante: nach allen Updates deaktivieren
@@ -91,9 +92,9 @@ CocoaHeads Dresden
 
 + Per-Controller Opt-In: `.restorationIdentifier`-Property setzen
     + IB/Storyboard oder Code
-+ Geschafft: State Preservation
++ Geschafft: State Preservation (Sicherung)
     + Gespeichert wird ein Pfad von Restoration-Identifiers
-+ TODO: State Restoration
++ TODO: State Restoration (Wiederherstellung)
 + Tag: `RESTORATION_IDENTIFIERS`
 
 ^ Screenshots werden benutzt, aber Controller nicht wiederhergestellt  
@@ -103,7 +104,7 @@ CocoaHeads Dresden
 
 # Implementierung: Controller
 
-+ Wiederherstellung von ViewControllern (Optionen):
++ Wiederherstellung von ViewControllern (verschiedene Optionen):
     1. Controller setzen `.restorationClass`
     1. AppDelegate instanziiert Controller auf Anfrage
     1. Implizit: Controller wurden zum Zeitpunkt der State Restoration bereits erstellt
@@ -119,13 +120,14 @@ CocoaHeads Dresden
 + Wiederherstellung von ViewControllern:
     + AppDelegate instanziiert Controller auf Anfrage
 
-```objectivec
+```objectivec  
+
 - (UIViewController *)application:(UIApplication *)application
     viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
-                            coder:(NSCoder *)coder;
+                            coder:(NSCoder *)coder;  
 ```
 
-+ `return nil`: Implizite Suche wird fortgesetzt
++ `return nil`: Andere Optionen (Implizite Suche) werden durchlaufen
 
 ^ in Demo-App nicht verwendet
 
@@ -164,12 +166,13 @@ CocoaHeads Dresden
     + Controller setzen `.restorationClass`
     + z.B. der Controller selbst: `UIViewControllerRestoration`-Protokoll implementieren
 
-```objectivec
+```objectivec  
+
 + viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents 
-                                        coder:(NSCoder *)coder;
-```
+                                        coder:(NSCoder *)coder;  
+```  
 ^ Nur 1 Methode im Protokoll  
-^ Hinweis auf Path vs. Name  
+^ Path != Name/Identifier  
 ^ Nicht nötig bei VC aus Storyboards
 
 ---
@@ -178,8 +181,8 @@ CocoaHeads Dresden
 
 + Wiederherstellung von ViewControllern:
     + Controller definieren `.restorationClass`
-    + Opt-Out durch `nil`
-        + Verhindert implizite Wiederherstellung aus Storyboards
+    + Opt-Out durch `nil` aus `viewControllerWithRestorationIdentifierPath:coder:`
+        + Verhindert auch implizite Wiederherstellung aus Storyboards
     + Zugriff auf Coder: Entscheidung über erfolgreiche Restoration möglich
     + Tag: `RESTORATION_CLASS`
 
@@ -297,7 +300,8 @@ CocoaHeads Dresden
     + Keine temporären Fehlermeldungen wiederherstellen
     + Snapshot ignorieren:
 
-```objectivec
+```objectivec  
+
 [[UIApplication sharedApplication] ignoreSnapshotOnNextApplicationLaunch];
 ```
 ---
