@@ -71,7 +71,7 @@ CocoaHeads Dresden
 + Restoration-Datei wird angelegt, enthält globale App-Infos (Version, Timestamp, Interface Idiom,...)
 + `return NO` nach inkompatiblen Updates oder großer Zeitspanne
 
-^ noch keine Infos über ViewController enthalten
+^ noch keine Infos über ViewController enthalten  
 ^ konservative Variante: nach allen Updates deaktivieren
 
 ---
@@ -79,7 +79,7 @@ CocoaHeads Dresden
 # Implementierung: Aktivierung
 
 + System nimmt Snapshot bevor App in den Hintergrund geht
-    + Ersetzt `Default.png`, falls mindestens ein ViewController State Preservation implementiert hat
+    + Ersetzt `Default.png` (bzw. das Launch-NIB), falls mindestens ein ViewController State Preservation implementiert hat
     
 + Tag: `STATE_RESTORATION_OPT_IN`
 
@@ -96,7 +96,7 @@ CocoaHeads Dresden
 + TODO: State Restoration
 + Tag: `RESTORATION_IDENTIFIERS`
 
-^ Screenshots werden benutzt, aber Controller nicht wiederhergestellt
+^ Screenshots werden benutzt, aber Controller nicht wiederhergestellt  
 ^ Gilt auch für Tab/Navigation-Controller
 
 ---
@@ -109,7 +109,7 @@ CocoaHeads Dresden
     1. Implizit: Controller wurden zum Zeitpunkt der State Restoration bereits erstellt
     1. Implizit: Controller befinden sich im Storyboard
     
-^ In der Reihenfolge, aber wegen Bsp.-App in anderer Reihenfolge erklärt
+^ In der Reihenfolge, aber wegen Bsp.-App in anderer Reihenfolge erklärt  
 ^ Storyboard-Name wird bei Preservation mit gespeichert
 
 ---   
@@ -153,7 +153,7 @@ CocoaHeads Dresden
         + Später erstellte ViewController nicht
         + Zustand der Controller/Views wird nicht hergestellt          
         
-^ zweiten Punkt als nächstes fixen
+^ zweiten Punkt als nächstes fixen  
 ^ State Restoration bricht dort ab, wo sie zuerst fehlschlägt
 
 ---
@@ -168,8 +168,8 @@ CocoaHeads Dresden
 + viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents 
                                         coder:(NSCoder *)coder;
 ```
-^ Nur 1 Methode im Protokoll
-^ Hinweis auf Path vs. Name
+^ Nur 1 Methode im Protokoll  
+^ Hinweis auf Path vs. Name  
 ^ Nicht nötig bei VC aus Storyboards
 
 ---
@@ -191,7 +191,8 @@ CocoaHeads Dresden
 
 + `UIStateRestoring`-Protokoll:
 
-```objectivec
+```objectivec  
+
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     [coder encodeFloat:self.value forKey:"encodingKeyValue"];
@@ -199,13 +200,11 @@ CocoaHeads Dresden
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     ... // happens after viewDidLoad
-}
-
-```
+}```
 
 + Primitive Werte und andere Objekte, die selbst State Restoration implementieren
 
-^ neu in iOS 7
+^ neu in iOS 7  
 ^ Objekte: Shared References
 
 ---
@@ -218,8 +217,8 @@ CocoaHeads Dresden
     + funktioniert nur beschränkt automatisch
 + Tag: `STATE_ENCODING`
 
-^ Kein Zurück: Controller bereits neu erstellt
-^ Views: bessere Encapsulation/Reusability
+^ Kein Zurück: Controller bereits neu erstellt  
+^ Views: bessere Encapsulation/Reusability  
 ^ viewDidLoad-Notiz: Alternative: restorationClass wertet Coder aus
 
 ---
@@ -321,7 +320,7 @@ CocoaHeads Dresden
 + WWDC 2013 Session 222: What's New in State Restoration
     + Ausführlich & aktuell
 
-^ New: Custom Objects & Snapshots
-^ Doku: Tools-Support nicht erwähnt
-^ beides empfehlenswert
-^ Apple Sample Code verfügbar
+^ New: Custom Objects & Snapshots  
+^ Doku: Tools-Support nicht erwähnt  
+^ beides empfehlenswert  
+^ Apple Sample Code verfügbar  
