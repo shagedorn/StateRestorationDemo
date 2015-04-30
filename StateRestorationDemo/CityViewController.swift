@@ -29,7 +29,7 @@ class CityViewController: UIViewController, UIViewControllerRestoration, UIState
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if cityName.utf16Count > 0 {
+        if count(cityName) > 0 {
             nameLabel.text = cityName
             imageView.image = UIImage(named:cityName)
         }

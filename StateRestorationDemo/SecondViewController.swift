@@ -15,7 +15,7 @@ class SecondViewController: UIViewController, UIStateRestoring {
 
     var cities: Array<String> = ["Dresden", "Cologne"]
 
-    override init() {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: "SecondViewController", bundle: nil)
         tabBarItem = UITabBarItem(title: "Second", image: UIImage(named: "second"), tag: 0)
         restorationIdentifier = String.fromCString(object_getClassName(self))

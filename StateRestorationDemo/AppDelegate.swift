@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.restorationIdentifier = "mainWindow"
 
         // First Screen
-        let firstViewController = FirstViewController()
+        let firstViewController = FirstViewController(nibName: nil, bundle: nil)
 
         // Second Screen
-        let secondRootViewController = SecondViewController()
+        let secondRootViewController = SecondViewController(nibName: nil, bundle: nil)
         let secondViewController = UINavigationController(rootViewController: secondRootViewController)
         secondViewController.restorationIdentifier = "NavigationController"
 

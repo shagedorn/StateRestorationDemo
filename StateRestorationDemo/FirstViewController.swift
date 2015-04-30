@@ -12,7 +12,7 @@ class FirstViewController: UIViewController, UIStateRestoring {
                             
     @IBOutlet weak var slider: UISlider!
     
-    override init() {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: "FirstViewController", bundle: nil)
         tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
         restorationIdentifier = String.fromCString(object_getClassName(self))
