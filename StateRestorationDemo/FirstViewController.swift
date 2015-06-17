@@ -8,19 +8,30 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
-                            
+@objc(FirstViewController) class FirstViewController: UIViewController {
+
+    //MARK: Outlets
+
     @IBOutlet weak var slider: UISlider!
-    
+
+    //MARK: Initialization
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: "FirstViewController", bundle: nil)
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.commonInit()
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
+    }
+
+    final func commonInit() {
         tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
         restorationIdentifier = String.fromCString(object_getClassName(self))
     }
 
-    required init(coder aDecoder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
+    //MARK: State Restoring
 
     override func encodeRestorableStateWithCoder(coder: NSCoder)  {
         super.encodeRestorableStateWithCoder(coder)
