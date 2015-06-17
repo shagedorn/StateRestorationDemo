@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController, UIStateRestoring {
+class SecondViewController: UIViewController {
                             
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var citySelectionControl: UISegmentedControl!
@@ -40,7 +40,7 @@ class SecondViewController: UIViewController, UIStateRestoring {
 
     @IBAction func selectionChanged(sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
-        var selectedCityImage = UIImage(named: cities[selectedIndex])
+        let selectedCityImage = UIImage(named: cities[selectedIndex])
         imageView.image = selectedCityImage
     }
 

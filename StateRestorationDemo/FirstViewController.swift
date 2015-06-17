@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, UIStateRestoring {
+class FirstViewController: UIViewController {
                             
     @IBOutlet weak var slider: UISlider!
     
@@ -30,6 +30,10 @@ class FirstViewController: UIViewController, UIStateRestoring {
     override func decodeRestorableStateWithCoder(coder: NSCoder)  {
         super.decodeRestorableStateWithCoder(coder)
         slider.value = coder.decodeFloatForKey("encodingKeySliderValue")
+    }
+
+    override func applicationFinishedRestoringState() {
+        print("finished restoring")
     }
 }
 
