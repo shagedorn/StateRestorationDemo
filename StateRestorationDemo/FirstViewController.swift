@@ -8,39 +8,69 @@
 
 import UIKit
 
-@objc(FirstViewController) class FirstViewController: UIViewController {
+class FirstViewController: UIViewController {
 
-    //MARK: Outlets
+    // MARK: - Outlets
 
-    @IBOutlet weak var slider: UISlider!
+    @IBOutlet private weak var slider: UISlider!
 
-    //MARK: Initialization
+    // MARK: - Initialization
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.commonInit()
+        commonInit()
     }
 
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.commonInit()
+        super.init(coder: aDecoder)!
+        commonInit()
     }
 
-    final func commonInit() {
+    final private func commonInit() {
         tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "first"), tag: 0)
-        restorationIdentifier = String.fromCString(object_getClassName(self))
+
+        /*
+        We use the unqualified name as identifier. It must be unqique for
+        siblings in the object graph, but global uniqueness is not 
+        required.
+        
+        This controller is initially created before `application(_:willFinishLaunchingWithOptions:)`
+        returns. Thus, we don't have to restore the controller itself
+        (only its internal state, see below).
+        
+        Setting a non-nil `String` as its `restorationIdentifier` ensures
+        this view controller and its children can take part in state
+        restoration.
+        */
+        restorationIdentifier = String(self.dynamicType)
     }
 
-    //MARK: State Restoring
+    // MARK: - State Restoring
+
+    /*
+    We must restore the slider's state manually. These methods are only called
+    when the controller's `restorationIdentifier` is not nil, and the app
+    has opted into state restoration (see `AppDelegate.swift`).
+    */
+
+    private let encodingKeySliderValue = "encodingKeySliderValue"
 
     override func encodeRestorableStateWithCoder(coder: NSCoder)  {
         super.encodeRestorableStateWithCoder(coder)
-        coder.encodeFloat(slider.value, forKey: "encodingKeySliderValue")
+        guard isViewLoaded() else {
+            /*
+            If the view has not been loaded, the app will crash
+            upon accessing force-unwrapped outlets, e.g., `slider`.
+            */
+            return
+        }
+        coder.encodeFloat(slider.value, forKey: encodingKeySliderValue)
     }
 
     override func decodeRestorableStateWithCoder(coder: NSCoder)  {
         super.decodeRestorableStateWithCoder(coder)
-        slider.value = coder.decodeFloatForKey("encodingKeySliderValue")
+        assert(isViewLoaded(), "We assume the controller is never restored without loading its view first.")
+        slider.value = coder.decodeFloatForKey(encodingKeySliderValue)
     }
 
     override func applicationFinishedRestoringState() {
