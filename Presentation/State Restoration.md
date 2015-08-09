@@ -16,246 +16,219 @@ Deckset Theme: Franziska, light green, 16:9
 
 -
 
-Sebastian Hagedorn  
-CocoaHeads Dresden  
-09.07.2014  
+Sebastian Hagedorn, iosphere GmbH  
+  
+Presented at CocoaHeads Dresden, 09.07.2014  
+Updated/translated to English, 08.08.2015
 
 ---
 
-# Übersicht
+# Table of Contents
 
 + Motivation
-+ Implementierung
++ Implementation
 + Debugging & GOTCHAs
-+ Quellen & Links
++ Sources & Links
 
 ---
 
 # Motivation
 
-+ iOS beendet im Hintergrund laufende Apps (aus Nutzersicht) wahllos
-+ State Restoration: Verbergen, dass App beendet wurde
-+ Ziel: Kein Unterschied zwischen Rückkehr zu laufender App und Neustart einer beendeten App
-    + Vollständige Wiederherstellung des alten Zustands nicht immer sinnvoll
++ iOS terminates background apps at (rather) random times
++ State restoration: Trying to hide from the user that the app had been terminated
++ Goal: Re-opening an app that was terminated by the system should equal the experience of switching to an app that awakes from the background
+    + **Note:** Full restoration is not always possible or even desirable, e.g., temporary alerts
     
 ---
 
-# Implementierung
+# Implementation
 
-+ Vorgehensweise:
-    + State Restoration aktivieren
-    + ViewController(hierarchie) wiederherstellen
-    + Status/Daten wiederherstellen
++ Roadmap:
+    + Opting into state restoration
+    + Restoring view controllers (and their hierarchy)
+    + Restoring fine-grained state
 
 ---
 
-# Implementierung
+# Implementation
 
-+ Beispielprojekt: <br />[github.com/shagedorn/StateRestorationDemo](https://github.com/shagedorn/StateRestorationDemo)
-    + Tag Ausgangslage: `NO_STATE_RESTORATION`
++ Sample project: <br />[github.com/shagedorn/StateRestorationDemo](https://github.com/shagedorn/StateRestorationDemo)
+    + Start tag: `NO_STATE_RESTORATION`
     
 ![right, fit](https://raw.githubusercontent.com/shagedorn/StateRestorationDemo/master/Presentation/app_screenshot.png)
+  
++ **Note:** Swift has evolved quickly, so only `master` will build with the latest tools, not the intermediary tags.
 
 ---
 
-# Implementierung: Aktivierung
+# Implementation: Opting In
 
-+ Opt-In im App Delegate:
++ Opt-In in the app delegate:
 
-```objectivec  
-
-- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder;
- 
-- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder;
+```swift  
+func application(_:shouldSaveApplicationState:) -> Bool
 ```
++ A restoration archive file named `data.data` with global app information (version, timestamp, interface idiom,...) will be created
 
-+ Restoration-Datei wird angelegt, enthält globale App-Infos (Version, Timestamp, Interface Idiom,...)
-+ `return NO` in `shouldRestoreApplicationState` nach inkompatiblen Updates oder großer Zeitspanne
-
-^ noch keine Infos über ViewController enthalten  
-^ konservative Variante: nach allen Updates deaktivieren
+```swift
+func application(_:shouldRestoreApplicationState:) -> Bool
+```
++ Consider returning `false` in `shouldRestoreApplicationState` after app updates
 
 ---
 
-# Implementierung: Aktivierung
+# Implementation: Opting In
 
-+ System nimmt Snapshot bevor App in den Hintergrund geht
-    + Ersetzt `Default.png` (bzw. das Launch-NIB), falls mindestens ein ViewController State Preservation implementiert hat
++ iOS takes a snapshot before the app goes into the background
+    + Snapshot replaces `Default.png` (or launch Nibs/Storyboards) if at least one view controller supports state restoration
     
 + Tag: `STATE_RESTORATION_OPT_IN`
 
-^ Kein Snapshot, falls es nichts zum Wiederherstellen gibt
-
 ---
 
-# Implementierung: Controller
+# Implementation: View Controller
 
-+ Per-Controller Opt-In: `.restorationIdentifier`-Property setzen
-    + IB/Storyboard oder Code
-+ Geschafft: State Preservation (Sicherung)
-    + Gespeichert wird ein Pfad von Restoration-Identifiers
-+ TODO: State Restoration (Wiederherstellung)
++ Per-controller opt-in: set the `restorationIdentifier` property
+    + Either in code, or Storyboard/Nib
++ **Done: State preservation**
+    + Per view controller, a path of restoration identifiers will be saved
++ **`TODO`: State restoration**
 + Tag: `RESTORATION_IDENTIFIERS`
 
-^ Screenshots werden benutzt, aber Controller nicht wiederhergestellt  
-^ Gilt auch für Tab/Navigation-Controller
-
 ---
 
-# Implementierung: Controller
+# Implementation: View Controller
 
-+ Wiederherstellung von ViewControllern (verschiedene Optionen):
-    1. Controller setzen `.restorationClass`
-    1. AppDelegate instanziiert Controller auf Anfrage
-    1. Implizit: Controller wurden zum Zeitpunkt der State Restoration bereits erstellt
-    1. Implizit: Controller befinden sich im Storyboard
-    
-^ In der Reihenfolge, aber wegen Bsp.-App in anderer Reihenfolge erklärt  
-^ Storyboard-Name wird bei Preservation mit gespeichert
++ View controller restoration (options):
+    1. Controller sets `restorationClass` to a class that implements `UIViewControllerRestoration`
+    1. App delegate instantiates controllers on demand
+    1. Implicit: Controller has already been created before state restoration begins
+    1. Implicit: Preserved controller had been instantiated from a storyboard
 
 ---   
 
-# Implementierung: Controller
+# Implementation: View Controller
 
-+ Wiederherstellung von ViewControllern:
-    + AppDelegate instanziiert Controller auf Anfrage
++ **Note:** State restoration is attempted in the order defined above, but in the following slides, the various mechanisms have been re-ordered by increasing complexity, and to follow the sample app.
 
-```objectivec  
+---    
 
-- (UIViewController *)application:(UIApplication *)application
-    viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents
-                            coder:(NSCoder *)coder;  
+# Implementation: View Controller
+
++ Restoration option:
+    + **Implicit: Controller has already been created before state restoration began**
+    + Call order:
+          1. `application(_:willFinishLaunchingWithOptions:)`
+          1. State restoration
+          1. `application(_:didFinishLaunchingWithOptions:)`
+
+---
+
+# Implementation: View Controller
+
++ Demo app's state at `BASIC_STATE_RESTORATION` tag:
+	+ Initial controllers (tabs one and two) are restored implicitly, including tab selection (we get that for free from `UITabBarController`)
+    + View controllers that are created later (city detail) are not restored
+    + State of the controllers (e.g., slider value) is not restored
+
+---
+
+# Implementation: View Controller
+
++ Restoration option:
+    + **Set a `restorationClass`**
+    + E.g., set the controller as its own restoration class
+    + Implement `UIViewControllerRestoration` protocol, and create the controller on demand:
+
+```swift  
+ class func viewControllerWithRestorationIdentifierPath(_:coder:)
+ -> UIViewController?
 ```
 
-+ `return nil`: Andere Optionen (Implizite Suche) werden durchlaufen
-
-^ in Demo-App nicht verwendet
-
----   
-
-# Implementierung: Controller
-
-+ Wiederherstellung von ViewControllern:
-    + Implizit: Controller wurden zum Zeitpunkt der State Restoration bereits erstellt
-    + Reihenfolge:
-          1. `application:willFinishLaunchingWithOptions:`
-          1. [State Restoration]
-          1. `application:didFinishLaunchingWithOptions:`
-          
-^ Controller in will... instanziieren: Deswegen bisher kein Erfolg
-
 ---
 
-# Implementierung: Controller
+# Implementation: View Controller
 
-+ Wiederherstellung von ViewControllern:
-
-    + Status der Demo-App bei Tag `BASIC_STATE_RESTORATION`:
-        + Initiale ViewController (Tabs) werden implizit hergestellt
-        + Später erstellte ViewController nicht
-        + Zustand der Controller/Views wird nicht hergestellt          
-        
-^ zweiten Punkt als nächstes fixen  
-^ State Restoration bricht dort ab, wo sie zuerst fehlschlägt
-
----
-
-# Implementierung: Controller
-
-+ Wiederherstellung von ViewControllern:
-    + Controller setzen `.restorationClass`
-    + z.B. der Controller selbst: `UIViewControllerRestoration`-Protokoll implementieren
-
-```objectivec  
-
-+ viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents 
-                                        coder:(NSCoder *)coder;  
-```  
-^ Nur 1 Methode im Protokoll  
-^ Path != Name/Identifier  
-^ Nicht nötig bei VC aus Storyboards
-
----
-
-# Implementierung: Controller
-
-+ Wiederherstellung von ViewControllern:
-    + Controller definieren `.restorationClass`
-    + Opt-Out durch `nil` aus `viewControllerWithRestorationIdentifierPath:coder:`
-        + Verhindert auch implizite Wiederherstellung aus Storyboards
-    + Zugriff auf Coder: Entscheidung über erfolgreiche Restoration möglich
++ Restoration option: Set a `restorationClass` (continued)
+    + Opt-out/abort: return `nil` from `viewControllerWithRestorationIdentifierPath
+    (_:coder:)`
+    + `coder` parameter allows informed decision about whether or not to restore
     + Tag: `RESTORATION_CLASS`
 
-^ Test: Verhindert nicht wirklich Wiederherstellung aus Storyboards...
-
 ---
 
-# Implementierung: State
+# Implementation: View Controller
 
-+ `UIStateRestoring`-Protokoll:
++ Restoration option:
+    + **App delegate creates controllers on demand**, similar to `UIViewControllerRestoration` protocol at controller level
 
-```objectivec  
+```swift  
+func application(_:viewControllerWithRestorationIdentifierPath:
+coder:) -> UIViewController? 
+```
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
-    [super encodeRestorableStateWithCoder:coder];
-    [coder encodeFloat:self.value forKey:"encodingKeyValue"];
++ `return nil`: In contrast to `UIViewControllerRestoration`, this does *not* cancel implicit restoration
++ Not used in the sample app
+
+--- 
+
+# Implementation: State
+
++ Restoring fine-grained state: `UIStateRestoring` protocol
+
+```swift
+override func encodeRestorableStateWithCoder(coder: NSCoder)  {
+    super.encodeRestorableStateWithCoder(coder)
+    // Make sure not to access explicitly-unwrapped outlets directly: 
+    // May be called when the controller (e.g., in a tab) has never loaded its view
+    coder.encodeFloat(slider?.value ?? 0.5, forKey: "encodingKeySlider")
 }
+override func decodeRestorableStateWithCoder(coder: NSCoder)  {
+    super.decodeRestorableStateWithCoder(coder)
+    slider.value = coder.decodeFloatForKey("encodingKeySlider")
+}
+```
 
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
-    ... // happens after viewDidLoad
-}```
-
-+ Primitive Werte und andere Objekte, die selbst State Restoration implementieren
-
-^ neu in iOS 7  
-^ Objekte: Shared References
++ Encode/decode primitive values or other objects that implement state restoration
 
 ---
 
-# Implementierung: State
+# Implementation: State
 
-+ `decodeRestorableStateWithCoder:` wird nach `viewDidLoad` aufgerufen
-+ Restoration kann nicht mehr abgebrochen werden
-+ Views können selbst State Restoration implementieren
-    + funktioniert nur beschränkt automatisch
++ `decodeRestorableStateWithCoder(_)` is called after `viewDidLoad()`
++ Restoration (of the view controller itself) cannot be cancelled at this point
++ Any object can implement `UIStateRestoring`, but views and controllers do automatically, and are registered by the system (see `UIStateRestoring` documentation for details)
 + Tag: `STATE_ENCODING`
 
-^ Kein Zurück: Controller bereits neu erstellt  
-^ Views: bessere Encapsulation/Reusability  
-^ viewDidLoad-Notiz: Alternative: restorationClass wertet Coder aus
-
 ---
-
+ 
 # Debugging
 
-+ Auslöser für State Preservation: App geht in Hintergrund
-    + nicht in Xcode oder App Switcher killen
++ State preservation is triggered when app enters the background
     
-+ Löschen von State Restoration-Daten:
-    + Restoration schlägt fehl/App crasht
-    + Nutzer beendet App
-        + nicht im Simulator
-        + kann mit iOS Profil umgangen werden
-
-^ Endlosschleife vermeiden
++ Restoration archive is deleted when...
+    + Restoration fails or the app crashes
+    + User force-quits the app in the app switcher
+        + Can be disabled with a developer mode profile
+        + Simulator: Quitting the app from Xcode (when in the background) does not delete the archive
 
 ---
 
 # Debugging
 
-+ Infos werden in `data.data`-Dateien abgelegt
-    + Binary PLISTs: Auslesen mit `plutil`-Tool oder `restorationArchiveTool`
-    + [https://developer.apple.com/downloads/](https://developer.apple.com/downloads/) -> Suche nach "restoration"
-        + `restorationArchiveTool`
-        + `StateRestoration DebugLogging` Profil
-        + `StateRestoration DeveloperMode` Profil
++ State information is stored in `data.data` files
+    + Binary PLISTs: Use `plutil` or `restorationArchiveTool` to read & debug the archives
+    + [https://developer.apple.com/downloads/](https://developer.apple.com/downloads/) -> Log in and search for "restoration"
+        + `restorationArchiveTool` and documentation
+        + `Debug Logging` iOS profile
+        + `Developer Mode` iOS profile
         
 ---
 
 # Debugging
 
-+ Tipp: `data.data`-Suche im Simulator-Ordner in Finder-Sidebar speichern
-+ Aufruf: `restorationArchiveTool path/to/data.data`
++ Tip: Save a Finder search for `data.data` within the simulator directory in your Finder sidebar
++ Usage: `restorationArchiveTool path/to/data.data`
 
 ![inline, fill](https://raw.githubusercontent.com/shagedorn/StateRestorationDemo/master/Presentation/data_example.png)
 
@@ -263,10 +236,10 @@ CocoaHeads Dresden
 
 # Debugging
 
-+ DebugLogging Profil: Sehr verbose, inkl. Zeitmessung
++ Debug Logging profile: very verbose, including time profiling
 
-+ `Warning: Unable to create restoration in progress marker file`
-    + Keine `data.data`-Datei gefunden
++ "`Warning: Unable to create restoration in progress marker file`"
+    + `data.data` archive could not be found, i.e., state preservation failed
     
 ![right, fit](https://raw.githubusercontent.com/shagedorn/StateRestorationDemo/master/Presentation/log_example.png)
 
@@ -274,57 +247,45 @@ CocoaHeads Dresden
 
 # Debugging
 
-+ `Can't find Child View Controller at index 1 with identifier TabController/:[1]:/NavigationController/:[1]:/_TtC20StateRestorationDemo18CityViewController, truncating child array`
-    + Controller nicht gefunden
++ "`Can't find Child View Controller at index 1 with identifier TabController/:[1]:/NavigationController/:[1]:/_TtC20StateRestorationDemo18CityViewController, truncating child array`"
+    + Controller that was stored in the archive could not be restored
 
 ---
 
-# GOTCHAs/Tipps
+# GOTCHAs/Tips
 
-+ `.restorationIdentifier` durch Überschreiben des Getters setzen
-    + Ermöglicht State Preservation: `data.data` ist ok
-    + Keine Restoration: Registrierung im Setter?
-
-+ `.restorationIdentifier` in `init` setzen:
-    + Encapsulation vs. Wiederverwendbarkeit
-
-^ Wiederverwendbarkeit: Controller wird immer wiederhergestellt, nicht offensichtlich
++ "Setting" the `restorationIdentifier` by overwriting the getter instead of setting the variable property does not work 
+    + Enables state preservation: `data.data` is fine
+    + Restoration fails
+    	+ My guess: The object is registered for state restoration in `didSet`
 
 ---
 
-# GOTCHAs/Tipps
+# GOTCHAs/Tips
 
-+ Nicht alle Subviews werden von Snapshots erfasst
-    + Bsp.: AlertViews
-    + Konsistenz zwischen Snapshots und App anstreben
-    + Keine temporären Fehlermeldungen wiederherstellen
-    + Snapshot ignorieren:
++ Not all subviews are included in the snapshot image, e.g., alerts
+    + Strive for consistency between the snapshot and what you restore
+    + Don't restore temporary errors that (hopefully) have become stale in the meantime, e.g., connection errors
+    + Ignore snapshot:
 
-```objectivec  
-
-[[UIApplication sharedApplication] ignoreSnapshotOnNextApplicationLaunch];
+```swift  
+UIApplication.sharedApplication().ignoreSnapshotOnNextApplicationLaunch()
 ```
 ---
 
-# Tipps
+# Tips
 
-+ `.window` muss nicht explizit gesichert werden, aber Preservation des Windows fügt unter iOS 8 Informationen über Size Classes hinzu
++ The main window does not have to be preserved explicitly, but doing so adds extra information, such as, size classes, to the archive
+
     + Tag: `SIZE_CLASSES`
 
 ---
 
-# Quellen & Links
-
-+ Doku: [https://developer.apple.com/library/ios/documentation/iphone/conceptual/iphoneosprogrammingguide/StatePreservation/StatePreservation.html](https://developer.apple.com/library/ios/documentation/iphone/conceptual/iphoneosprogrammingguide/StatePreservation/StatePreservation.html)
-    + Ausführlich, aber nicht ganz aktuell
-    + grundsätzlich ab iOS 6, Ergänzungen (fehlen hier) in iOS 7
-
-^ u.a. Hinweis zu UIDataSourceModelAssociation
+# Sources & Links
++ [Sample project](https://github.com/shagedorn/StateRestorationDemo) source code and comments
++ Docs: [Preserving Your App’s Visual Appearance Across Launches](https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/StrategiesforImplementingYourApp/StrategiesforImplementingYourApp.html#//apple_ref/doc/uid/TP40007072-CH5-SW2)
+    + Detailed, but not 100% up-to-date
+    + General availability since iOS 6, improvements in iOS 7
   
-+ WWDC 2013 Session 222: What's New in State Restoration
-    + Ausführlich & aktuell
-
-^ New: Custom Objects & Snapshots  
-^ Doku: Tools-Support nicht erwähnt  
-^ beides empfehlenswert  
-^ Apple Sample Code verfügbar  
++ WWDC 2013 Session 222: ["What's New in State Restoration"](https://developer.apple.com/videos/wwdc/2013/#222)
+    + Detailed and up-to-date 

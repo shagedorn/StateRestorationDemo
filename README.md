@@ -4,7 +4,9 @@
 
 ![](https://raw.githubusercontent.com/shagedorn/StateRestorationDemo/master/Presentation/app_screenshot.png)
 
-Created for a presentation at CocoaHeads Dresden on 09 July 2014. The presentation is included in the repository, the slides are currently only available in German. Feel free to contact me if English slides are of interest: [@hagidd](http://twitter.com/hagidd).
+Created for a presentation at CocoaHeads Dresden on 09 July 2014. The Deckset presentation (rendered as PDF and the Markdown source) is included in the repository. Feel free to contact me for questions: [@hagidd](http://twitter.com/hagidd).
+
+Tested with Xcode 7 beta 5.
 
 ## Tags 
 
@@ -17,3 +19,5 @@ Tags outline the various steps to enable state restoration in iOS apps:
 + `RESTORATION_CLASS`: Non-initial view controllers are restored, too
 + `STATE_ENCODING`: View controllers restore their views' state
 + `SIZE_CLASSES`: The window's size classes are preserved
+
+**Note:** Both to improve the project and to support the current version of Swift, there have been major updates that are not reflected by the tagged commits. The tags are still helpful to follow the various steps, but you should use the latest commit on `master` for a working version.
