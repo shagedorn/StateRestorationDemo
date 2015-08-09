@@ -53,40 +53,39 @@ class CityViewController: UIViewController, UIViewControllerRestoration {
 
     private func updateView() {
         nameLabel.text = cityName
-        guard !cityName.characters.isEmpty else {
-            // prevent CUICatalog warnings if image was not found
-            return
-        }
         imageView.image = UIImage(named: cityName)
     }
 
     // MARK: - State Restoration
 
     /*
-    Provide a new instance on demand. At this point, we have no further information regarding
-    the object's state (e.g., the view controller's `cityName` property state). All we know
-    is its former place in the view controller hierarchy, described by `identifierComponents`.
+    Provide a new instance on demand, including decoding of its previous state,
+    which would else be done in `decodeRestorableStateWithCoder(_)`
     */
     class func viewControllerWithRestorationIdentifierPath(identifierComponents: [AnyObject], coder: NSCoder) -> UIViewController? {
         assert(String(self) == (identifierComponents.last as! String), "unexpected restoration path: \(identifierComponents)")
-        return CityViewController(cityName: "")
+
+        guard let restoredName = coder.decodeObjectForKey(encodingKeyCityName) as? String else {
+            print("decoding the city name failed")
+            // it does not make sense to create an empty controller of this type:
+            // abort state restoration at this point
+            return nil
+        }
+        return CityViewController(cityName: restoredName)
     }
 
-    private let encodingKeyCityName = "encodingKeyCityName"
+    static private let encodingKeyCityName = "encodingKeyCityName"
 
     override func encodeRestorableStateWithCoder(coder: NSCoder)  {
         super.encodeRestorableStateWithCoder(coder)
-        coder.encodeObject(cityName, forKey: encodingKeyCityName)
+        coder.encodeObject(cityName, forKey: CityViewController.encodingKeyCityName)
     }
 
-    override func decodeRestorableStateWithCoder(coder: NSCoder)  {
+    /*
+    We have decoded our state in `viewControllerWithRestorationIdentifierPath(_:coder:)`
+    already.
+    */
+    /*override func decodeRestorableStateWithCoder(coder: NSCoder)  {
         super.decodeRestorableStateWithCoder(coder)
-        assert(isViewLoaded(), "We assume the controller is never restored without loading its view first.")
-        guard let restoredName = coder.decodeObjectForKey(encodingKeyCityName) as? String else {
-            assert(false, "decoding the city name failed")
-            return
-        }
-        cityName = restoredName
-        updateView()
-    }
+    }*/
 }
