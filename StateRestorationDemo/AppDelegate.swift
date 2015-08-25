@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     To get the app to restore in the simulator, follow these steps:
 
-    - send the app in the background (home button / cmd + h)
+    - send the app to the background (home button / cmd + h)
     - quit the app in Xcode
     - relaunch the app
     
