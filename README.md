@@ -6,7 +6,7 @@
 
 Created for a presentation at CocoaHeads Dresden on 09 July 2014. The Deckset presentation (rendered as PDF and the Markdown source) is included in the repository. Feel free to contact me for questions: [@hagidd](http://twitter.com/hagidd).
 
-Tested with Xcode 7 beta 5.
+Last tested with Xcode 7 GM / 7.1 beta.
 
 ## Tags 
 
