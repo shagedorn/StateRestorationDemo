@@ -6,7 +6,7 @@
 
 Created for a presentation at CocoaHeads Dresden on 09 July 2014. The Deckset presentation (rendered as PDF and the Markdown source) is included in the repository. Feel free to contact me for questions: [@hagidd](http://twitter.com/hagidd).
 
-Last tested with Xcode 7.1 and iOS 9.1.
+Last tested with Xcode 7.2 beta 2 and iOS 9.2 beta 2.
 
 ## Tags 
 
