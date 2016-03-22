@@ -8,6 +8,8 @@ Created for a presentation at CocoaHeads Dresden on 09 July 2014. The Deckset pr
 
 Verified with Xcode 7.3 and iOS 9.3. I regularily build & test the app with the latest Xcode betas, as well as Swift development snapshots.
 
+The `swift_3_0` branch will be kept up to date to build with the latest [Swift 3.0 development snapshots](https://swift.org/download/).
+
 ## Tags 
 
 Tags outline the various steps to enable state restoration in iOS apps:
