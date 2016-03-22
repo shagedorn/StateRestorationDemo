@@ -55,8 +55,8 @@ class FirstViewController: UIViewController {
 
     private let encodingKeySliderValue = "encodingKeySliderValue"
 
-    override func encodeRestorableStateWithCoder(coder: NSCoder)  {
-        super.encodeRestorableStateWithCoder(coder)
+    override func encodeRestorableState(with coder: NSCoder)  {
+        super.encodeRestorableState(with: coder)
         guard isViewLoaded() else {
             /*
             If the view has not been loaded, the app will crash
@@ -64,13 +64,14 @@ class FirstViewController: UIViewController {
             */
             return
         }
-        coder.encodeFloat(slider.value, forKey: encodingKeySliderValue)
+
+        coder.encode(slider.value, forKey: encodingKeySliderValue)
     }
 
-    override func decodeRestorableStateWithCoder(coder: NSCoder)  {
-        super.decodeRestorableStateWithCoder(coder)
+    override func decodeRestorableState(with coder: NSCoder)  {
+        super.decodeRestorableState(with: coder)
         assert(isViewLoaded(), "We assume the controller is never restored without loading its view first.")
-        slider.value = coder.decodeFloatForKey(encodingKeySliderValue)
+        slider.value = coder.decodeFloat(forKey: encodingKeySliderValue)
     }
 
     override func applicationFinishedRestoringState() {

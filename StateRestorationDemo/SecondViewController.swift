@@ -38,8 +38,8 @@ class SecondViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        citySelectionControl.setTitle(cities[0], forSegmentAtIndex: 0)
-        citySelectionControl.setTitle(cities[1], forSegmentAtIndex: 1)
+        citySelectionControl.setTitle(cities[0], forSegmentAt: 0)
+        citySelectionControl.setTitle(cities[1], forSegmentAt: 1)
 
         updateImage()
     }
@@ -50,6 +50,7 @@ class SecondViewController: UIViewController {
             assert(false, "selected index '\(selectedIndex)' is out of bounds.")
             return
         }
+
         let selectedCityImage = UIImage(named: cities[selectedIndex])
         imageView.image = selectedCityImage
     }
@@ -68,19 +69,20 @@ class SecondViewController: UIViewController {
 
     private let encodingKeySegmentIndex = "encodingKeySegmentIndex"
 
-    override func encodeRestorableStateWithCoder(coder: NSCoder)  {
-        super.encodeRestorableStateWithCoder(coder)
+    override func encodeRestorableState(with coder: NSCoder)  {
+        super.encodeRestorableState(with: coder)
         guard isViewLoaded() else {
             // For a discussion, see `FirstViewController.swift`
             return
         }
-        coder.encodeInteger(citySelectionControl.selectedSegmentIndex, forKey: encodingKeySegmentIndex)
+
+        coder.encode(citySelectionControl.selectedSegmentIndex, forKey: encodingKeySegmentIndex)
     }
 
-    override func decodeRestorableStateWithCoder(coder: NSCoder)  {
-        super.decodeRestorableStateWithCoder(coder)
+    override func decodeRestorableState(with coder: NSCoder)  {
+        super.decodeRestorableState(with: coder)
         assert(isViewLoaded(), "We assume the controller is never restored without loading its view first.")
-        citySelectionControl.selectedSegmentIndex = coder.decodeIntegerForKey(encodingKeySegmentIndex)
+        citySelectionControl.selectedSegmentIndex = coder.decodeInteger(forKey: encodingKeySegmentIndex)
         updateImage()
     }
 

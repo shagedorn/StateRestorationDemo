@@ -62,23 +62,24 @@ class CityViewController: UIViewController, UIViewControllerRestoration {
     Provide a new instance on demand, including decoding of its previous state,
     which would else be done in `decodeRestorableStateWithCoder(_)`
     */
-    class func viewControllerWithRestorationIdentifierPath(identifierComponents: [AnyObject], coder: NSCoder) -> UIViewController? {
+    static func viewController(withRestorationIdentifierPath identifierComponents: [AnyObject], coder: NSCoder) -> UIViewController? {
         assert(String(self) == (identifierComponents.last as! String), "unexpected restoration path: \(identifierComponents)")
 
-        guard let restoredName = coder.decodeObjectForKey(encodingKeyCityName) as? String else {
+        guard let restoredName = coder.decodeObject(forKey: encodingKeyCityName) as? String else {
             print("decoding the city name failed")
             // it does not make sense to create an empty controller of this type:
             // abort state restoration at this point
             return nil
         }
+
         return CityViewController(cityName: restoredName)
     }
 
     static private let encodingKeyCityName = "encodingKeyCityName"
 
-    override func encodeRestorableStateWithCoder(coder: NSCoder)  {
-        super.encodeRestorableStateWithCoder(coder)
-        coder.encodeObject(cityName, forKey: CityViewController.encodingKeyCityName)
+    override func encodeRestorableState(with coder: NSCoder)  {
+        super.encodeRestorableState(with: coder)
+        coder.encode(cityName, forKey: CityViewController.encodingKeyCityName)
     }
 
     /*

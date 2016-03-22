@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
 
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.main().bounds)
         guard let appWindow = window else {
             fatalError("failed to create window")
         }
