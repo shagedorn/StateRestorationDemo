@@ -79,7 +79,7 @@ class CityViewController: UIViewController, UIViewControllerRestoration {
 
     override func encodeRestorableState(with coder: NSCoder)  {
         super.encodeRestorableState(with: coder)
-        coder.encode(cityName, forKey: CityViewController.encodingKeyCityName)
+        coder.encode(cityName as NSString, forKey: CityViewController.encodingKeyCityName)
     }
 
     /*

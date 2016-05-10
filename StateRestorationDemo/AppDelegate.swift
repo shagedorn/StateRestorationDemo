@@ -19,17 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Note that we use `willFinishLaunching`, not `didFinishLaunching`
     */
 
-    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]? = [:]) -> Bool {
         window = UIWindow(frame: UIScreen.main().bounds)
         guard let appWindow = window else {
             fatalError("failed to create window")
         }
 
         /*
-        The window will be restored either way, but assigning an identifier
-        adds extra information (e.g., last-used size classes) to the
-        restoration archive (see below)
-        */
+         The window will be restored either way, but assigning an identifier
+         adds extra information (e.g., last-used size classes) to the
+         restoration archive (see below)
+         */
         appWindow.restorationIdentifier = "MainWindow"
 
         let firstViewController = FirstViewController()
@@ -88,11 +88,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     documentation provided with the `restorationArchiveTool` mentioned above.
     */
 
-    func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
         return true
     }
 
-    func application(application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
         return true
     }
 
