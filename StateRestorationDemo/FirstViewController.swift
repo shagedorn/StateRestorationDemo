@@ -16,7 +16,7 @@ class FirstViewController: UIViewController {
 
     // MARK: - Initialization
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         commonInit()
     }
@@ -55,13 +55,13 @@ class FirstViewController: UIViewController {
 
     private let encodingKeySliderValue = "encodingKeySliderValue"
 
-    override func encodeRestorableState(with coder: NSCoder)  {
+    override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
         guard isViewLoaded() else {
             /*
-            If the view has not been loaded, the app will crash
-            upon accessing force-unwrapped outlets, e.g., `slider`.
-            */
+             If the view has not been loaded, the app will crash
+             upon accessing force-unwrapped outlets, e.g., `slider`.
+             */
             return
         }
 
