@@ -71,7 +71,7 @@ class SecondViewController: UIViewController {
 
     override func encodeRestorableState(with coder: NSCoder)  {
         super.encodeRestorableState(with: coder)
-        guard isViewLoaded() else {
+        guard isViewLoaded else {
             // For a discussion, see `FirstViewController.swift`
             return
         }
@@ -81,7 +81,7 @@ class SecondViewController: UIViewController {
 
     override func decodeRestorableState(with coder: NSCoder)  {
         super.decodeRestorableState(with: coder)
-        assert(isViewLoaded(), "We assume the controller is never restored without loading its view first.")
+        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
         citySelectionControl.selectedSegmentIndex = coder.decodeInteger(forKey: encodingKeySegmentIndex)
         updateImage()
     }

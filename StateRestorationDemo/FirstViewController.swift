@@ -57,7 +57,7 @@ class FirstViewController: UIViewController {
 
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
-        guard isViewLoaded() else {
+        guard isViewLoaded else {
             /*
              If the view has not been loaded, the app will crash
              upon accessing force-unwrapped outlets, e.g., `slider`.
@@ -70,7 +70,7 @@ class FirstViewController: UIViewController {
 
     override func decodeRestorableState(with coder: NSCoder)  {
         super.decodeRestorableState(with: coder)
-        assert(isViewLoaded(), "We assume the controller is never restored without loading its view first.")
+        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
         slider.value = coder.decodeFloat(forKey: encodingKeySliderValue)
     }
 
