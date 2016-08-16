@@ -42,7 +42,7 @@ class FirstViewController: UIViewController {
         this view controller and its children can take part in state
         restoration.
         */
-        restorationIdentifier = String(self.dynamicType)
+        restorationIdentifier = String(describing: type(of: self))
     }
 
     // MARK: - State Restoring

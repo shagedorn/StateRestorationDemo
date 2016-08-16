@@ -31,7 +31,7 @@ class SecondViewController: UIViewController {
         tabBarItem = UITabBarItem(title: "Second", image: UIImage(named: "second"), tag: 0)
         
         // For a discussion, see `FirstViewController.swift`
-        restorationIdentifier = String(self.dynamicType)
+        restorationIdentifier = String(describing: type(of: self))
     }
 
     // MARK: - Lifecycle and actions

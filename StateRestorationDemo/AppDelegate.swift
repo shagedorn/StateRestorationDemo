@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Note that we use `willFinishLaunching`, not `didFinishLaunching`
     */
 
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]? = [:]) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = [:]) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         guard let appWindow = window else {
             fatalError("failed to create window")
