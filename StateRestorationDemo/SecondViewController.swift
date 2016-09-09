@@ -17,7 +17,7 @@ class SecondViewController: UIViewController {
 
     // MARK - Initialization
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         commonInit()
     }
@@ -31,15 +31,15 @@ class SecondViewController: UIViewController {
         tabBarItem = UITabBarItem(title: "Second", image: UIImage(named: "second"), tag: 0)
         
         // For a discussion, see `FirstViewController.swift`
-        restorationIdentifier = String(self.dynamicType)
+        restorationIdentifier = String(describing: type(of: self))
     }
 
     // MARK: - Lifecycle and actions
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        citySelectionControl.setTitle(cities[0], forSegmentAtIndex: 0)
-        citySelectionControl.setTitle(cities[1], forSegmentAtIndex: 1)
+        citySelectionControl.setTitle(cities[0], forSegmentAt: 0)
+        citySelectionControl.setTitle(cities[1], forSegmentAt: 1)
 
         updateImage()
     }
@@ -50,6 +50,7 @@ class SecondViewController: UIViewController {
             assert(false, "selected index '\(selectedIndex)' is out of bounds.")
             return
         }
+
         let selectedCityImage = UIImage(named: cities[selectedIndex])
         imageView.image = selectedCityImage
     }
@@ -68,19 +69,20 @@ class SecondViewController: UIViewController {
 
     private let encodingKeySegmentIndex = "encodingKeySegmentIndex"
 
-    override func encodeRestorableStateWithCoder(coder: NSCoder)  {
-        super.encodeRestorableStateWithCoder(coder)
-        guard isViewLoaded() else {
+    override func encodeRestorableState(with coder: NSCoder)  {
+        super.encodeRestorableState(with: coder)
+        guard isViewLoaded else {
             // For a discussion, see `FirstViewController.swift`
             return
         }
-        coder.encodeInteger(citySelectionControl.selectedSegmentIndex, forKey: encodingKeySegmentIndex)
+
+        coder.encode(citySelectionControl.selectedSegmentIndex, forKey: encodingKeySegmentIndex)
     }
 
-    override func decodeRestorableStateWithCoder(coder: NSCoder)  {
-        super.decodeRestorableStateWithCoder(coder)
-        assert(isViewLoaded(), "We assume the controller is never restored without loading its view first.")
-        citySelectionControl.selectedSegmentIndex = coder.decodeIntegerForKey(encodingKeySegmentIndex)
+    override func decodeRestorableState(with coder: NSCoder)  {
+        super.decodeRestorableState(with: coder)
+        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
+        citySelectionControl.selectedSegmentIndex = coder.decodeInteger(forKey: encodingKeySegmentIndex)
         updateImage()
     }
 

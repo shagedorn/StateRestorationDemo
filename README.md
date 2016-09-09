@@ -6,9 +6,8 @@
 
 Created for a presentation at CocoaHeads Dresden on 09 July 2014. The Deckset presentation (rendered as PDF and the Markdown source) is included in the repository. Feel free to contact me for questions: [@hagidd](http://twitter.com/hagidd).
 
-Verified with Xcode 7.3 and iOS 9.3. I regularily build & test the app with the latest Xcode betas, as well as Swift development snapshots.
+Last verified with Xcode 8.0 and iOS 10.0. The app is written in Swift 3.0.
 
-The `swift_3_0` branch will be kept up to date to build with the latest [Swift 3.0 development snapshots](https://swift.org/download/).
 
 ## Tags 
 
