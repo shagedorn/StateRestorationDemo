@@ -89,6 +89,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
 
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        let lib = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!.appendingPathComponent("Saved Application State")
+        print("Restoration files: \(lib)")
+
         return true
     }
 
