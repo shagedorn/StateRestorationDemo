@@ -22,3 +22,11 @@ Tags outline the various steps to enable state restoration in iOS apps:
 + `SIZE_CLASSES`: The window's size classes are preserved
 
 **Note:** Both to improve the project and to support the current version of Swift, there have been major updates that are not reflected by the tagged commits. The tags are still helpful to follow the various steps, but you should use the latest commit on `master` for a working version.
+
+## Other Resources
+
+Apple also published two very helpful sample projects:
+
+[Apple Sample Code: State Restoration](https://developer.apple.com/library/content/samplecode/StateRestore/)
+
+[Apple Sample Code: State Restoration of Child View Controllers](https://developer.apple.com/library/content/samplecode/StateRestoreChildViews/)
