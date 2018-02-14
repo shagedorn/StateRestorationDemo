@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecondViewController" customModule="StateRestorationDemo" customModuleProvider="target">
@@ -17,9 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="1Bo-sd-mVV">
-                    <rect key="frame" x="40" y="466" width="123" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1Bo-sd-mVV">
+                    <rect key="frame" x="40" y="466" width="121" height="29"/>
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
@@ -28,24 +32,33 @@
                         <action selector="selectionChanged:" destination="-1" eventType="valueChanged" id="YJK-GF-26O"/>
                     </connections>
                 </segmentedControl>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="cOr-83-W30">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cOr-83-W30">
                     <rect key="frame" x="40" y="88" width="240" height="368"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ClB-Gb-XPC">
-                    <rect key="frame" x="227" y="464" width="53" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ClB-Gb-XPC">
+                    <rect key="frame" x="227" y="465" width="53" height="30"/>
                     <state key="normal" title="Choose">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="chooseCity:" destination="-1" eventType="touchUpInside" id="4In-8T-NeC"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="cOr-83-W30" firstAttribute="centerX" secondItem="q5E-Ac-2bS" secondAttribute="centerX" id="5hX-0d-XwT"/>
+                <constraint firstItem="q5E-Ac-2bS" firstAttribute="trailing" secondItem="ClB-Gb-XPC" secondAttribute="trailing" constant="40" id="A9Y-DQ-aEM"/>
+                <constraint firstItem="cOr-83-W30" firstAttribute="leading" secondItem="q5E-Ac-2bS" secondAttribute="leading" constant="40" id="cSf-JM-7ih"/>
+                <constraint firstItem="1Bo-sd-mVV" firstAttribute="top" secondItem="cOr-83-W30" secondAttribute="bottom" constant="10" id="dmQ-e9-1mm"/>
+                <constraint firstItem="cOr-83-W30" firstAttribute="top" secondItem="q5E-Ac-2bS" secondAttribute="top" constant="24" id="gsq-Pn-k8S"/>
+                <constraint firstItem="q5E-Ac-2bS" firstAttribute="bottom" secondItem="1Bo-sd-mVV" secondAttribute="bottom" constant="25" id="jSg-GH-KV4"/>
+                <constraint firstItem="ClB-Gb-XPC" firstAttribute="centerY" secondItem="1Bo-sd-mVV" secondAttribute="centerY" id="n01-EH-Yjt"/>
+                <constraint firstItem="1Bo-sd-mVV" firstAttribute="leading" secondItem="q5E-Ac-2bS" secondAttribute="leading" constant="40" id="ocv-GU-tjp"/>
+            </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+            <viewLayoutGuide key="safeArea" id="q5E-Ac-2bS"/>
         </view>
     </objects>
 </document>
