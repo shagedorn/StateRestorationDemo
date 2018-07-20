@@ -45,7 +45,7 @@ class SecondViewController: UIViewController {
     }
 
     private func updateImage() {
-        let selectedIndex = (citySelectionControl.selectedSegmentIndex == UISegmentedControlNoSegment) ? 0 : citySelectionControl.selectedSegmentIndex
+        let selectedIndex = (citySelectionControl.selectedSegmentIndex == UISegmentedControl.noSegment) ? 0 : citySelectionControl.selectedSegmentIndex
         guard cities.indices ~= selectedIndex else {
             assert(false, "selected index '\(selectedIndex)' is out of bounds.")
             return
