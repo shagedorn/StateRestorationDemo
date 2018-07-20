@@ -8,28 +8,28 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
-                            
-    @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var citySelectionControl: UISegmentedControl!
+final class SecondViewController: UIViewController {
+
+    @IBOutlet private weak var imageView: UIImageView?
+    @IBOutlet private weak var citySelectionControl: UISegmentedControl?
 
     private let cities = ["Dresden", "Cologne"]
 
-    // MARK - Initialization
+    // MARK: - Initialization
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         commonInit()
     }
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         commonInit()
     }
 
-    final private func commonInit() {
-        tabBarItem = UITabBarItem(title: "Second", image: UIImage(named: "second"), tag: 0)
-        
+    private func commonInit() {
+        tabBarItem = UITabBarItem(title: "Second", image: #imageLiteral(resourceName: "second"), tag: 0)
+
         // For a discussion, see `FirstViewController.swift`
         restorationIdentifier = String(describing: type(of: self))
     }
@@ -38,53 +38,60 @@ class SecondViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        citySelectionControl.setTitle(cities[0], forSegmentAt: 0)
-        citySelectionControl.setTitle(cities[1], forSegmentAt: 1)
+        citySelectionControl?.setTitle(cities.first, forSegmentAt: 0)
+        citySelectionControl?.setTitle(cities.last, forSegmentAt: 1)
 
         updateImage()
     }
 
     private func updateImage() {
-        let selectedIndex = (citySelectionControl.selectedSegmentIndex == UISegmentedControl.noSegment) ? 0 : citySelectionControl.selectedSegmentIndex
+        guard let selectionControl = citySelectionControl else {
+            return
+        }
+
+        let selectedIndex = (selectionControl.selectedSegmentIndex == UISegmentedControl.noSegment) ? 0 : selectionControl.selectedSegmentIndex
+
         guard cities.indices ~= selectedIndex else {
             assert(false, "selected index '\(selectedIndex)' is out of bounds.")
             return
         }
 
         let selectedCityImage = UIImage(named: cities[selectedIndex])
-        imageView.image = selectedCityImage
+        imageView?.image = selectedCityImage
     }
 
-    @IBAction private func selectionChanged(_: UISegmentedControl) {
+    @IBAction private func selectionChanged(from sender: UISegmentedControl) {
         updateImage()
     }
 
-    @IBAction private func chooseCity(_: UIButton) {
-        let selectedIndex = citySelectionControl.selectedSegmentIndex
-        let cityController = CityViewController(cityName:cities[selectedIndex])
+    @IBAction private func chooseCity(from sender: UIButton) {
+        guard let selectedIndex = citySelectionControl?.selectedSegmentIndex else {
+            assertionFailure("citySelectionControl not loaded")
+            return
+        }
+
+        let cityController = CityViewController(cityName: cities[selectedIndex])
         navigationController?.pushViewController(cityController, animated: true)
     }
 
     // MARK: - State Restoration
 
-    private let encodingKeySegmentIndex = "encodingKeySegmentIndex"
+    private static let encodingKeySegmentIndex = "encodingKeySegmentIndex"
 
-    override func encodeRestorableState(with coder: NSCoder)  {
+    override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
-        guard isViewLoaded else {
-            // For a discussion, see `FirstViewController.swift`
+        guard let selectionControl = citySelectionControl, isViewLoaded else {
             return
         }
 
-        coder.encode(citySelectionControl.selectedSegmentIndex, forKey: encodingKeySegmentIndex)
+        coder.encode(selectionControl.selectedSegmentIndex, forKey: SecondViewController.encodingKeySegmentIndex)
     }
 
-    override func decodeRestorableState(with coder: NSCoder)  {
+    override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
         assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
-        citySelectionControl.selectedSegmentIndex = coder.decodeInteger(forKey: encodingKeySegmentIndex)
+        citySelectionControl?.selectedSegmentIndex = coder.decodeInteger(forKey: SecondViewController.encodingKeySegmentIndex)
         updateImage()
     }
 
 }
-

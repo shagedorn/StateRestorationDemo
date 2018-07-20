@@ -8,10 +8,10 @@
 
 import UIKit
 
-class CityViewController: UIViewController {
+final class CityViewController: UIViewController {
 
-    @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var imageView: UIImageView?
+    @IBOutlet private weak var nameLabel: UILabel?
 
     private var cityName: String
 
@@ -33,10 +33,10 @@ class CityViewController: UIViewController {
         restorationClass = type(of: self)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         cityName = ""
         assert(false, "init(coder:) not supported. Please use init(cityName:) instead.")
-        super.init(coder: aDecoder)!
+        super.init(coder: aDecoder)
     }
 
     // MARK: - Lifecycle
@@ -47,17 +47,17 @@ class CityViewController: UIViewController {
     }
 
     private func updateView() {
-        nameLabel.text = cityName
-        imageView.image = UIImage(named: cityName)
+        nameLabel?.text = cityName
+        imageView?.image = UIImage(named: cityName)
     }
 
     // MARK: - State Restoration
 
     private static let encodingKeyCityName = "encodingKeyCityName"
 
-    override func encodeRestorableState(with coder: NSCoder)  {
+    override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
-        coder.encode(cityName as NSString, forKey: CityViewController.encodingKeyCityName)
+        coder.encode(cityName, forKey: CityViewController.encodingKeyCityName)
     }
 
     /*
@@ -78,7 +78,7 @@ extension CityViewController: UIViewControllerRestoration {
 
     /*
      *  Provide a new instance on demand, including decoding of its previous state,
-     *  which would else be done in `decodeRestorableStateWithCoder(_)`
+     *  which would else be done in `decodeRestorableStateWithCoder(coder:)`
      */
     static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
         assert(String(describing: self) == identifierComponents.last, "unexpected restoration path: \(identifierComponents)")
@@ -90,7 +90,7 @@ extension CityViewController: UIViewControllerRestoration {
             return nil
         }
 
-        return CityViewController(cityName: restoredName)
+        return self.init(cityName: restoredName)
     }
 
 }
