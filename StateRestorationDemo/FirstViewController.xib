@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,16 +20,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7qm-N7-vPI">
-                    <rect key="frame" x="28" y="329" width="319" height="31"/>
+                    <rect key="frame" x="28" y="318.5" width="319" height="31"/>
                 </slider>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="7qm-N7-vPI" firstAttribute="centerX" secondItem="gNt-dJ-YYJ" secondAttribute="centerX" id="X5f-NS-jdf"/>
                 <constraint firstItem="7qm-N7-vPI" firstAttribute="leading" secondItem="gNt-dJ-YYJ" secondAttribute="leading" constant="30" id="Yq2-hR-vkO"/>
                 <constraint firstItem="7qm-N7-vPI" firstAttribute="centerY" secondItem="gNt-dJ-YYJ" secondAttribute="centerY" id="vVl-Ko-yEf"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="gNt-dJ-YYJ"/>
+            <point key="canvasLocation" x="138" y="154"/>
         </view>
     </objects>
 </document>
