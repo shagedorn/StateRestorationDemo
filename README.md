@@ -23,6 +23,10 @@ Tags outline the various steps to enable state restoration in iOS apps:
 
 **Note:** Both to improve the project and to support the current version of Swift, there have been major updates that are not reflected by the tagged commits. The tags are still helpful to follow the various steps, but you should use the latest commit on `master` for a working version.
 
+## Limitations
+
+By default, state restoration happens synchronously at launch on the main queue. While you can [move work off the main queue](https://developer.apple.com/documentation/uikit/uiapplication/1623060-extendstaterestoration), it will still kick in right after app launch and should finish as quickly as possible, which means it cannot easily be adopted by apps that need to log in or fetch a new session on every launch.
+
 ## Other Resources
 
 Apple also published two very helpful sample projects:
@@ -30,3 +34,5 @@ Apple also published two very helpful sample projects:
 [Apple Sample Code: State Restoration](https://developer.apple.com/library/content/samplecode/StateRestore/)
 
 [Apple Sample Code: State Restoration of Child View Controllers](https://developer.apple.com/library/content/samplecode/StateRestoreChildViews/)
+
+On iOS 13+, it is recommended to (re)store your model-level state using `NSUserActivity`. You can get started by reading [this blog post](https://www.vadimbulavin.com/ios13-ipados-uiscene-state-restoration-with-nsuseractivity-and-swiftui/).
