@@ -27,7 +27,7 @@ final class FirstViewController: UIViewController {
     }
 
     private func commonInit() {
-        tabBarItem = UITabBarItem(title: "First", image: #imageLiteral(resourceName: "first"), tag: 0)
+        tabBarItem = UITabBarItem(title: "First", image: .init(named: "first"), tag: 0)
 
         /*
          *  We use the unqualified name as identifier. It must be unqique for
@@ -60,13 +60,13 @@ final class FirstViewController: UIViewController {
             return
         }
 
-        coder.encode(loadedSlider.value, forKey: FirstViewController.encodingKeySliderValue)
+        coder.encode(loadedSlider.value, forKey: Self.encodingKeySliderValue)
     }
 
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
         assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
-        slider?.value = coder.decodeFloat(forKey: FirstViewController.encodingKeySliderValue)
+        slider?.value = coder.decodeFloat(forKey: Self.encodingKeySliderValue)
     }
 
     override func applicationFinishedRestoringState() {

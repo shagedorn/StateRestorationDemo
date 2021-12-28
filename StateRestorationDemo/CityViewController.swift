@@ -13,7 +13,7 @@ final class CityViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView?
     @IBOutlet private weak var nameLabel: UILabel?
 
-    private var cityName: String
+    private let cityName: String
 
     // MARK: - Initialization
 
@@ -35,7 +35,7 @@ final class CityViewController: UIViewController {
 
     required init?(coder aDecoder: NSCoder) {
         cityName = ""
-        assert(false, "init(coder:) not supported. Please use init(cityName:) instead.")
+        assertionFailure("init(coder:) not supported. Please use init(cityName:) instead.")
         super.init(coder: aDecoder)
     }
 
@@ -57,16 +57,16 @@ final class CityViewController: UIViewController {
 
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
-        coder.encode(cityName, forKey: CityViewController.encodingKeyCityName)
+        coder.encode(cityName, forKey: Self.encodingKeyCityName)
     }
 
     /*
      *  We have decoded our state in `viewControllerWithRestorationIdentifierPath(_:coder:)`
      *  already.
      */
-    //override func decodeRestorableStateWithCoder(coder: NSCoder)  {
-    //    super.decodeRestorableStateWithCoder(coder)
-    //}
+    // override func decodeRestorableStateWithCoder(coder: NSCoder)  {
+    //     super.decodeRestorableStateWithCoder(coder)
+    // }
 }
 
 /*
@@ -83,14 +83,15 @@ extension CityViewController: UIViewControllerRestoration {
     static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
         assert(String(describing: self) == identifierComponents.last, "unexpected restoration path: \(identifierComponents)")
 
-        guard let restoredName = coder.decodeObject(forKey: encodingKeyCityName) as? String else {
+        // swiftlint:disable:next legacy_objc_type
+        guard let restoredName = coder.decodeObject(of: NSString.self, forKey: encodingKeyCityName) else {
             print("decoding the city name failed")
             // it does not make sense to create an empty controller of this type:
             // abort state restoration at this point
             return nil
         }
 
-        return self.init(cityName: restoredName)
+        return self.init(cityName: restoredName as String)
     }
 
 }

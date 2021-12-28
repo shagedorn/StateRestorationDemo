@@ -13,7 +13,7 @@ final class SecondViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView?
     @IBOutlet private weak var citySelectionControl: UISegmentedControl?
 
-    private let cities = ["Dresden", "Cologne"]
+    private static let cities = ["Dresden", "Cologne"]
 
     // MARK: - Initialization
 
@@ -28,7 +28,7 @@ final class SecondViewController: UIViewController {
     }
 
     private func commonInit() {
-        tabBarItem = UITabBarItem(title: "Second", image: #imageLiteral(resourceName: "second"), tag: 0)
+        tabBarItem = UITabBarItem(title: "Second", image: .init(named: "second"), tag: 0)
 
         // For a discussion, see `FirstViewController.swift`
         restorationIdentifier = String(describing: type(of: self))
@@ -38,8 +38,8 @@ final class SecondViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        citySelectionControl?.setTitle(cities.first, forSegmentAt: 0)
-        citySelectionControl?.setTitle(cities.last, forSegmentAt: 1)
+        citySelectionControl?.setTitle(Self.cities.first, forSegmentAt: 0)
+        citySelectionControl?.setTitle(Self.cities.last, forSegmentAt: 1)
 
         updateImage()
     }
@@ -51,12 +51,12 @@ final class SecondViewController: UIViewController {
 
         let selectedIndex = (selectionControl.selectedSegmentIndex == UISegmentedControl.noSegment) ? 0 : selectionControl.selectedSegmentIndex
 
-        guard cities.indices ~= selectedIndex else {
-            assert(false, "selected index '\(selectedIndex)' is out of bounds.")
+        guard Self.cities.indices ~= selectedIndex else {
+            assertionFailure("selected index '\(selectedIndex)' is out of bounds.")
             return
         }
 
-        let selectedCityImage = UIImage(named: cities[selectedIndex])
+        let selectedCityImage = UIImage(named: Self.cities[selectedIndex])
         imageView?.image = selectedCityImage
     }
 
@@ -70,7 +70,7 @@ final class SecondViewController: UIViewController {
             return
         }
 
-        let cityController = CityViewController(cityName: cities[selectedIndex])
+        let cityController = CityViewController(cityName: Self.cities[selectedIndex])
         navigationController?.pushViewController(cityController, animated: true)
     }
 
@@ -84,13 +84,13 @@ final class SecondViewController: UIViewController {
             return
         }
 
-        coder.encode(selectionControl.selectedSegmentIndex, forKey: SecondViewController.encodingKeySegmentIndex)
+        coder.encode(selectionControl.selectedSegmentIndex, forKey: Self.encodingKeySegmentIndex)
     }
 
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
         assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
-        citySelectionControl?.selectedSegmentIndex = coder.decodeInteger(forKey: SecondViewController.encodingKeySegmentIndex)
+        citySelectionControl?.selectedSegmentIndex = coder.decodeInteger(forKey: Self.encodingKeySegmentIndex)
         updateImage()
     }
 
