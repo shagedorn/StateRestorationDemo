@@ -64,9 +64,9 @@ final class CityViewController: UIViewController {
      *  We have decoded our state in `viewControllerWithRestorationIdentifierPath(_:coder:)`
      *  already.
      */
-    //override func decodeRestorableStateWithCoder(coder: NSCoder)  {
-    //    super.decodeRestorableStateWithCoder(coder)
-    //}
+    // override func decodeRestorableStateWithCoder(coder: NSCoder)  {
+    //     super.decodeRestorableStateWithCoder(coder)
+    // }
 }
 
 /*
@@ -83,6 +83,7 @@ extension CityViewController: UIViewControllerRestoration {
     static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
         assert(String(describing: self) == identifierComponents.last, "unexpected restoration path: \(identifierComponents)")
 
+        // swiftlint:disable:next legacy_objc_type
         guard let restoredName = coder.decodeObject(of: NSString.self, forKey: encodingKeyCityName) else {
             print("decoding the city name failed")
             // it does not make sense to create an empty controller of this type:
