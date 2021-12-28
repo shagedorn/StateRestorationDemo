@@ -50,7 +50,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    // MARK: - UITabBarItem(tState Restoration Opt-In
+    // MARK: - State Restoration Opt-In
 
     /*
      *  Unless these methods return YES, the application's state is not saved/restored, no
@@ -96,7 +96,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
-        return true
+        true
     }
 
 }
