@@ -56,11 +56,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
      *  Unless these methods return YES, the application's state is not saved/restored, no
      *  matter what you do elsewhere. Consider it a global switch.
      *
-     *  You might want to return `false` conditionally in application(_:shouldRestoreApplicationState:)
+     *  You might want to return `false` conditionally in application(_:shouldRestoreSecureApplicationState:)
      *  after app updates that include changes to the view (controller) hierarchy and other, potentially
      *  restoration-breaking changes.
      *
-     *  Returning `true` in application(_:shouldSaveApplicationState:) will create a restoration
+     *  Returning `true` in application(_:shouldSaveSecureApplicationState:) will create a restoration
      *  archive ("data.data") which you can inspect using the `restorationArchiveTool` provided by Apple:
      *
      *  https://developer.apple.com/downloads/ (Login required; search for "restoration")
@@ -86,7 +86,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
      *  when the app goes into the background. To debug state restoration on device, read the
      *  documentation provided with the `restorationArchiveTool` mentioned above.
      */
-    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+    func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool {
         // archive files will end up in this directory – only printing it for debugging
         // purposes so you can quickly `cd` there
         let libDir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first?.appendingPathComponent("Saved Application State")
@@ -95,7 +95,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+    func application(_ application: UIApplication, shouldRestoreSecureApplicationState coder: NSCoder) -> Bool {
         true
     }
 

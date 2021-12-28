@@ -83,14 +83,14 @@ extension CityViewController: UIViewControllerRestoration {
     static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
         assert(String(describing: self) == identifierComponents.last, "unexpected restoration path: \(identifierComponents)")
 
-        guard let restoredName = coder.decodeObject(forKey: encodingKeyCityName) as? String else {
+        guard let restoredName = coder.decodeObject(of: NSString.self, forKey: encodingKeyCityName) else {
             print("decoding the city name failed")
             // it does not make sense to create an empty controller of this type:
             // abort state restoration at this point
             return nil
         }
 
-        return self.init(cityName: restoredName)
+        return self.init(cityName: restoredName as String)
     }
 
 }
