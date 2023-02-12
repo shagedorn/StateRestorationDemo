@@ -1,16 +1,17 @@
-# last tested/reviewed with SwiftLint 0.45.1
+# last tested/reviewed with SwiftLint 0.50.3
 
 opt_in_rules:
+  - accessibility_label_for_image
+  - accessibility_trait_for_button
   - anonymous_argument_in_multiline_closure
-  - anyobject_protocol
   - array_init
   - attributes
   - balanced_xctest_lifecycle
-  - capture_variable
   - closure_body_length
   - closure_end_indentation
   - closure_spacing
   - collection_alignment
+  - comma_inheritance
   - conditional_returns_on_newline
   - contains_over_filter_count
   - contains_over_filter_is_empty
@@ -33,6 +34,7 @@ opt_in_rules:
   - fatal_error_message
   - file_name
   - file_name_no_space
+  - file_header
   - file_types_order
   - first_where
   - flatmap_over_map_reduce
@@ -47,7 +49,6 @@ opt_in_rules:
   - legacy_constructor
   - legacy_multiple
   - legacy_objc_type
-  - legacy_random
   - let_var_whitespace
   - literal_expression_end_indentation
   - lower_acl_than_parent
@@ -60,6 +61,7 @@ opt_in_rules:
   - multiline_parameters_brackets
   - nimble_operator
   - no_fallthrough_only
+  - ns_number_init_as_function_reference
   - nslocalizedstring_key
   - nslocalizedstring_require_bundle
   - number_separator
@@ -84,6 +86,9 @@ opt_in_rules:
   - redundant_optional_initialization
   - redundant_type_annotation
   - required_enum_case
+  - return_value_from_void_function
+  - self_binding
+  - shorthand_optional_binding
   - single_test_class
   - sorted_first_last
   - sorted_imports
@@ -92,16 +97,23 @@ opt_in_rules:
   - test_case_accessibility
   - toggle_bool
   - trailing_closure
+  - unavailable_condition
   - unavailable_function
   - unneeded_parentheses_in_closure_argument
   - unowned_variable_capture
   - untyped_error_in_catch
-  - unused_declaration
-  - unused_import
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_between_cases
+  - void_function_in_ternary
+  - weak_delegate
   - xct_specific_matcher
   - yoda_condition
+
+analyzer_rules:
+  - capture_variable
+  - typesafe_array_init
+  - unused_declaration
+  - unused_import
 
 # some UIKit functions are longer than the default already
 line_length: 300

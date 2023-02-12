@@ -74,14 +74,15 @@ extension CityViewController: UIViewControllerRestoration {
     ) -> UIViewController? {
         assert(String(describing: self) == identifierComponents.last, "unexpected restoration path: \(identifierComponents)")
 
-        // swiftlint:disable:next legacy_objc_type (this really needs to be NSString)
+        // (this really needs to be NSString)
+        // swiftlint:disable:next legacy_objc_type
         guard let restoredName = coder.decodeObject(of: NSString.self, forKey: encodingKeyCityName) else {
             print("decoding the city name failed")
             // it does not make sense to create an empty controller of this type:
             // abort state restoration at this point
             return nil
         }
-        
+
         return self.init(cityName: restoredName as String)
     }
 }
