@@ -4,11 +4,18 @@
 
 ![](https://raw.githubusercontent.com/shagedorn/StateRestorationDemo/master/Presentation/app_screenshot.png)
 
-Created for a presentation at CocoaHeads Dresden on 09 July 2014. The Deckset presentation (rendered as PDF and the Markdown source) is included in the repository. Feel free to contact me for questions: [@hagidd](http://twitter.com/hagidd).
+Created for a presentation at CocoaHeads Dresden on 09 July 2014. The Deckset 
+presentation (rendered as PDF and the Markdown source) is included in the 
+repository. Feel free to open a GitHub Issue for questions regarding this project.
 
-Last verified with Xcode 13.2 and iOS 15.2. The app is written in Swift 5.5.
+Last verified with Xcode 14.3 and iOS 16.2. The app is written in Swift 5.7.
 
-⚠️ This app demonstrates view- and view-controller-based state restoration in UIKit. As of iOS 13, Apple encourages to adopt user-activity-based state restoration. Please consult the [official documentation](https://developer.apple.com/documentation/uikit/uiviewcontroller/restoring_your_app_s_state) for a comparison of the two approaches and official demo material.
+⚠️ This app demonstrates view- and view-controller-based state restoration in
+UIKit. As of iOS 13, Apple encourages to adopt user-activity-based state 
+restoration. 
+
+Please consult the [official documentation](https://developer.apple.com/documentation/uikit/uiviewcontroller/restoring_your_app_s_state) 
+for a comparison of the two approaches and official demo material.
 
 ## Tags 
 
@@ -22,11 +29,18 @@ Tags outline the various steps to enable state restoration in iOS apps:
 + `STATE_ENCODING`: View controllers restore their views' state
 + `SIZE_CLASSES`: The window's size classes are preserved
 
-**Note:** Both to improve the project and to support the current version of Swift, there have been major updates that are not reflected by the tagged commits. The tags are still helpful to follow the various steps, but you should use the latest commit on `main` for a working version.
+**Note:** Both to improve the project and to support the current version of 
+Swift, there have been major updates that are not reflected by the tagged 
+commits. The tags are still helpful to follow the various steps, but you 
+should use the latest commit on `main` for a working version.
 
 ## Limitations
 
-By default, state restoration happens synchronously at launch on the main queue. While you can [move work off the main queue](https://developer.apple.com/documentation/uikit/uiapplication/1623060-extendstaterestoration), it will still kick in right after app launch and should finish as quickly as possible, which means it cannot easily be adopted by apps that need to log in or fetch a new session on every launch.
+By default, state restoration happens synchronously at launch on the main queue.
+While you can [move work off the main queue](https://developer.apple.com/documentation/uikit/uiapplication/1623060-extendstaterestoration),
+it will still kick in right after app launch and should finish as quickly as
+possible, which means it cannot easily be adopted by apps that need to log in 
+or fetch a new session on every launch.
 
 ## Other Resources
 

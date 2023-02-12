@@ -1,11 +1,3 @@
-//
-//  SecondViewController.swift
-//  StateRestorationDemo
-//
-//  Created by Sebastian Hagedorn on 05/07/14.
-//  Copyright (c) 2014 Sebastian Hagedorn. All rights reserved.
-//
-
 import UIKit
 
 final class SecondViewController: UIViewController {
@@ -28,9 +20,13 @@ final class SecondViewController: UIViewController {
     }
 
     private func commonInit() {
-        tabBarItem = UITabBarItem(title: "Second", image: .init(named: "second"), tag: 0)
+        tabBarItem = UITabBarItem(
+            title: "Second",
+            image: .init(systemName: "square.fill"),
+            tag: 0
+        )
 
-        // For a discussion, see `FirstViewController.swift`
+        // For explanation, see `FirstViewController.swift`
         restorationIdentifier = String(describing: type(of: self))
     }
 
@@ -45,11 +41,11 @@ final class SecondViewController: UIViewController {
     }
 
     private func updateImage() {
-        guard let selectionControl = citySelectionControl else {
+        guard let citySelectionControl else {
             return
         }
 
-        let selectedIndex = (selectionControl.selectedSegmentIndex == UISegmentedControl.noSegment) ? 0 : selectionControl.selectedSegmentIndex
+        let selectedIndex = (citySelectionControl.selectedSegmentIndex == UISegmentedControl.noSegment) ? 0 : citySelectionControl.selectedSegmentIndex
 
         guard Self.cities.indices ~= selectedIndex else {
             assertionFailure("selected index '\(selectedIndex)' is out of bounds.")
@@ -65,8 +61,15 @@ final class SecondViewController: UIViewController {
     }
 
     @IBAction private func chooseCity(from sender: UIButton) {
-        guard let selectedIndex = citySelectionControl?.selectedSegmentIndex else {
+        guard let citySelectionControl else {
             assertionFailure("citySelectionControl not loaded")
+            return
+        }
+
+        let selectedIndex = citySelectionControl.selectedSegmentIndex
+
+        guard Self.cities.indices ~= selectedIndex else {
+            assertionFailure("selected index '\(selectedIndex)' is out of bounds.")
             return
         }
 
@@ -76,20 +79,25 @@ final class SecondViewController: UIViewController {
 
     // MARK: - State Restoration
 
+    // For explanation, see `FirstViewController.swift`
+
     private static let encodingKeySegmentIndex = "encodingKeySegmentIndex"
 
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
-        guard let selectionControl = citySelectionControl, isViewLoaded else {
+        guard let citySelectionControl, isViewLoaded else {
             return
         }
 
-        coder.encode(selectionControl.selectedSegmentIndex, forKey: Self.encodingKeySegmentIndex)
+        coder.encode(citySelectionControl.selectedSegmentIndex, forKey: Self.encodingKeySegmentIndex)
     }
 
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
-        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
+        assert(
+            isViewLoaded,
+            "We assume the controller is never restored without loading its view first."
+        )
         citySelectionControl?.selectedSegmentIndex = coder.decodeInteger(forKey: Self.encodingKeySegmentIndex)
         updateImage()
     }
