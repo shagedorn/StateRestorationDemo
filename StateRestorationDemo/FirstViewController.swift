@@ -19,7 +19,11 @@ final class FirstViewController: UIViewController {
     }
 
     private func commonInit() {
-        tabBarItem = UITabBarItem(title: "First", image: .init(named: "first"), tag: 0)
+        tabBarItem = UITabBarItem(
+            title: "First",
+            image: .init(systemName: "circle.fill"),
+            tag: 0
+        )
 
         // We use the unqualified name as identifier. It must be unqique for
         // siblings in the object graph, but global uniqueness is not required.

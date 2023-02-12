@@ -20,7 +20,11 @@ final class SecondViewController: UIViewController {
     }
 
     private func commonInit() {
-        tabBarItem = UITabBarItem(title: "Second", image: .init(named: "second"), tag: 0)
+        tabBarItem = UITabBarItem(
+            title: "Second",
+            image: .init(systemName: "square.fill"),
+            tag: 0
+        )
 
         // For explanation, see `FirstViewController.swift`
         restorationIdentifier = String(describing: type(of: self))
